@@ -46,9 +46,10 @@ const Home = () => {
       BlogContractAbi,
       signer
     )
-    
+    // fetching addBlogPost() function from the contract and passing in the necessary parameters
     const addBlogs = await contract.addBlogPost(url, title, type, description);
     setLoading(true);
+    // waiting for the transaction to be mined
     await addBlogs.wait();
     getBlogPosts();
     setLoading(false);
@@ -57,13 +58,14 @@ const Home = () => {
 
   const getBlogPosts = async () => {
     try {
-
+      // Using a provider since we are reading from smart contract
       const provider = await getProviderOrSigner();
       const contract = new Contract(
         BlogContractAddress,
         BlogContractAbi,
         provider
         )
+        // fetching getBlogPost() function from the contract
         const getBlogs = await contract.getBlogPosts();
         setBlogs(getBlogs)
         console.table(blogs)
@@ -82,6 +84,7 @@ const Home = () => {
           BlogContractAbi,
           signer
         )
+        // passing in the parameter to delete the particular selected blog
         const deleteBlogs = await contract.deleteBlogPosts(index);
         setLoading(true);
         await deleteBlogs.wait();
@@ -94,11 +97,10 @@ const Home = () => {
 
     }
 
-    
-
 
     console.log(blogs)
-    
+
+    // mapping through the blogs array which consists of the data and render the BlogCard component 
     const getDynamicBlogs = blogs.map((blog, index) => {
       return <BlogCard key={index} darkMode={darkMode} {...blog} index={index} deleteBlogPosts={deleteBlogPosts}
       imgUrl={blog.url}

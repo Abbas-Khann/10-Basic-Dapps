@@ -1,9 +1,8 @@
 import React, {useState} from "react";
-import { BlogContractAbi } from "../../constants/constants";
 
 const AddBlog = (props) => {
 
-        const {toggleModal, addBlogPosts, setImageUrl} = props
+        const {toggleModal, addBlogPosts} = props
         const [form, setForm] = useState({
             url: "",
             title: "",

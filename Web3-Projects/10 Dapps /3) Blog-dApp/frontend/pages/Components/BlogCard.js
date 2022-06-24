@@ -47,11 +47,6 @@ const BlogCard = (props) => {
         {typeOf}
         </span>   
         <hr />
-        {/* <a
-        className="bg-white border-2 bg-violet-500 text-white rounded p-2 float-right cursor-pointer"
-        >
-        Open Blog
-        </a> */}
         </div>    
         </div>
     )
