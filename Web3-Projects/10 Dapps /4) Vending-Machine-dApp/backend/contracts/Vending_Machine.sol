@@ -21,7 +21,9 @@ contract Vending_Machine {
         return donutBalance[address(this)];
     }
 
-    // Let's get the amount of donuts your address owns via this function  
+    // Let's get the amount of donuts your address owns via this function
+    // takes user address as the input 
+    //   returns the donuts owned by the user  
     function getOwnedDonuts(address user) view external returns(uint){
         return donutBalance[user] ;
     }
