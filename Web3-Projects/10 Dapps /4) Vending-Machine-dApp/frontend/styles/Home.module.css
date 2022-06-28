@@ -1,0 +1,7 @@
+.showme {
+  display: none;
+}
+
+.showhim:hover .showme {
+  display: block;
+}
