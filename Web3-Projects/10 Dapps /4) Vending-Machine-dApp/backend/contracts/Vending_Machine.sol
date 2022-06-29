@@ -25,7 +25,7 @@ contract Vending_Machine {
     // takes user address as the input 
     //   returns the donuts owned by the user  
     function getOwnedDonuts(address user) view external returns(uint){
-        return donutBalance[user] ;
+        return donutBalance[user];
     }
 
     // This function will restock the vending machine and we have made sure
