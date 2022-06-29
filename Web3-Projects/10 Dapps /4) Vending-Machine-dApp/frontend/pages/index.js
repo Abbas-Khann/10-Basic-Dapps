@@ -51,9 +51,9 @@ const Home = () => {
   // We will be using signer here since we want to write to the blockchain 
   const restockDonuts = async (amount) => {
     try{
-      // setting isLoading to true, this is also provided by the signer Hook
-      // isLoading = true;
       const restockMachine = await contract.restock(amount);
+      // setting isLoading to true, this is also provided by the signer Hook
+      isLoading = true;
       // wait for the transaction to get mined
       await restockMachine.wait();
       isLoading = false;
@@ -70,13 +70,13 @@ const Home = () => {
   // We will enter a certain amount again to purchase from the machine
   const purchaseDonuts = async (amount) => {
     try{
-      // setting isLoading to true
-      // isLoading = true;
       // the value of each donut is 0.001 eth which can also be found in the Smart Contract solidity code
       const value = amount * 0.001;
       // The purchase function is a payable function if you recheck the solidity code so it will return a value,
       // And in order to change that value we are using the parseEther method from ethersJS and changing it into a readable format
       const purchase = await contract.purchase(amount,{value: utils.parseEther(value.toString())});
+      // setting isLoading to true
+      isLoading = true;
       await purchase.wait();
       isLoading = false;
     }
