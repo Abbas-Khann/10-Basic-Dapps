@@ -12,7 +12,7 @@ const main = async () => {
     );
 }
 
-// function invokation
+// function invokation and error handling
 
 main()
 .then(() => process.exit(0))
