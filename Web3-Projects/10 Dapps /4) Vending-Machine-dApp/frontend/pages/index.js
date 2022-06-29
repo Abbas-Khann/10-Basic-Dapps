@@ -33,7 +33,7 @@ const Home = () => {
     try{
       const remainingDonutsBalance = await contract.getDonutBalances().then((donut) => {
         return parseInt(donut._hex);
-        // the function returns an object and we wanted to fetch and convert it's hex value so we used parseInt
+        // the function returns an object and we wanted to fetch and convert it's hex value so we used parseInt for conversion purposes
       })
       // setting the state to the reaminingDonutsBalance variable 
       setRemainingDonuts(remainingDonutsBalance);
