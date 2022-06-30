@@ -3,6 +3,8 @@ import Navbar from './Components/Navbar'
 import styles from '../styles/Home.module.css'
 import { useProvider, useSigner, useContract } from 'wagmi'
 import Input from "./Components/Input"
+import { NFT_CONTRACT_ADDRESS, NFT_CONTRACT_ABI } from '../Constants/constants'
+
 
 const Home = () => {
   const [darkMode, setDarkMode] = useState(false)
