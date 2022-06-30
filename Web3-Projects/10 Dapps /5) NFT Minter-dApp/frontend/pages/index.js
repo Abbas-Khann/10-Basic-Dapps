@@ -19,7 +19,7 @@ const Home = () => {
     signerOrProvider: signer, provider
   })
 
-  const mint = async() => {
+  const mint = async () => {
     if (metadataURL !== ""){
       const nftContract = useContract({
         addressOrName: '',
@@ -30,9 +30,11 @@ const Home = () => {
       const tx = await nftContract.mintNFT(metadataURL) ;
       await tx.wait();
 
-      console.log(`NFT mineted for your memory`)      
-    }else{
-      console.log("Please upload and image and then mints")
+      console.log(`NFT minted for your memory`);      
+    }
+    else
+    {
+      console.log("Please upload an image and then mint");
     }
     
   }
