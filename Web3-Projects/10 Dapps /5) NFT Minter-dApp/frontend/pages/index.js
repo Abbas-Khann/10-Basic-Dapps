@@ -44,17 +44,12 @@ const Home = () => {
       darkMode={darkMode}
       toggleDarkMode={toggleDarkMode}
       />
+      <span 
+      className={`text-2xl my-3 ${darkMode ? `text-white` : `text-black` }`}
+      >Store your Memories in a Decentralized Manner</span>
       <div className={`${styles.cards} flex flex-col mx-1.5 py-1.5 w-2/4 h-3/5`}>
         <div className={styles.logo}><span className={styles.log1} >NFT</span><span className={styles.log2}>HUB</span> </div>
-      <span 
-      className={`text-xl ${darkMode ? `text-white` : `text-black` }`}
-      >A decentralized way to store your memories</span>
-      {/* <span
-      className={`text-xl ${darkMode ? `text-white` : `text-black` }`}
-      >Are you worried that your private moments could be leaked in public??</span> */}
-      <span 
-      className={`text-xl ${darkMode ? `text-white` : `text-black` }`}>
-       Now you can store your special moments in a decentralized manner </span>
+      
       <Input/>
       </div>
     </div>
