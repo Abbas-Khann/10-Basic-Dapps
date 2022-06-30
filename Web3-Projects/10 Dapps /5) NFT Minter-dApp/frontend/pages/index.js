@@ -13,6 +13,12 @@ const Home = () => {
   const provider = useProvider();
   const {data: signer, isError, isLoading} = useSigner();
   
+  const contract = useContract({
+    addressOrName: NFT_CONTRACT_ADDRESS,
+    contractInterface: NFT_CONTRACT_ABI,
+    signerOrProvider: signer, provider
+  })
+
   const mint = async() => {
     if (metadataURL !== ""){
       const nftContract = useContract({
