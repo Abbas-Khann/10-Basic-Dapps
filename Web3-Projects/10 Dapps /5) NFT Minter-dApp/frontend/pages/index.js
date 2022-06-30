@@ -10,7 +10,7 @@ import { NFT_CONTRACT_ADDRESS, NFT_CONTRACT_ABI } from '../Constants/constants'
 
 const Home = () => {
   const [darkMode, setDarkMode] = useState(false);
-  const [metadataURL,setMetaDataURL] = useState("");
+  const [metaDataURL,setMetaDataURL] = useState("");
 
   const provider = useProvider();
   const {data: signer, isError, isLoading} = useSigner();
@@ -63,7 +63,9 @@ const Home = () => {
       <div className={`${styles.cards} flex flex-col mx-1.5 py-1.5 w-2/4 h-3/5`}>
         <div className={styles.logo}><span className={styles.log1} >NFT</span><span className={styles.log2}>HUB</span> </div>
       
-      <Input/>
+      <Input
+      setMetaDataURL={setMetaDataURL}
+      />
       </div>
     </div>
   )
