@@ -2,13 +2,14 @@ import React, {useState} from 'react';
 // Import the NFTStorage class and File constructor from the 'nft.storage' package
 import { NFTStorage, File } from 'nft.storage';
 const NFT_STORAGE_KEY = process.env.NFT_KEY
+import { toast } from 'react-toastify';
 
 const Input = (props) => {
+  const { setMetaDataURL } = props
   // const [text,setText] = useState()
   const [file, setFile] = useState("");
 
 
-  const { setMetaDataURL } = props
 
 
     /**
