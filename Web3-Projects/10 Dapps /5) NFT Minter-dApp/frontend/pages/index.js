@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { ToastContainer, toast } from 'react-toastify';
 import Navbar from './Components/Navbar'
 import styles from '../styles/Home.module.css'
 import { useProvider, useSigner, useContract } from 'wagmi'
@@ -6,8 +7,9 @@ import Input from "./Components/Input"
 import { NFT_CONTRACT_ADDRESS, NFT_CONTRACT_ABI } from '../Constants/constants'
 
 
+
 const Home = () => {
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(false);
   const [metadataURL,setMetaDataURL] = useState("");
 
   const provider = useProvider();
@@ -19,22 +21,24 @@ const Home = () => {
     signerOrProvider: signer, provider
   })
 
+  // const nftContract = useContract({
+  //   addressOrName: '',
+  //   contractInterface: abi,
+  //   signerOrProvider: signer || provider,
+  // })
   const mint = async () => {
     if (metadataURL !== ""){
-      const nftContract = useContract({
-        addressOrName: '',
-        contractInterface: abi,
-        signerOrProvider: signer || provider,
-      })
 
-      const tx = await nftContract.mintNFT(metadataURL) ;
+      const tx = await contract.mintNFT(metadataURL) ;
       await tx.wait();
 
-      console.log(`NFT minted for your memory`);      
+      toast.success(`NFT minted Successfully`);
+      console.log("DONE")      
     }
     else
     {
-      console.log("Please upload an image and then mint");
+      toast.log("Please upload an image and then mint");
+      console.error("Nope!!!")
     }
     
   }
@@ -52,6 +56,7 @@ const Home = () => {
       darkMode={darkMode}
       toggleDarkMode={toggleDarkMode}
       />
+      <ToastContainer />
       <span 
       className={`text-2xl my-3 ${darkMode ? `text-white` : `text-black` }`}
       >Store your Memories in a Decentralized Manner</span>
