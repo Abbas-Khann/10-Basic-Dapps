@@ -66,6 +66,7 @@ const Home = () => {
       <Input
       setMetaDataURL={setMetaDataURL}
       />
+      <button>Mint 🚀</button>
       </div>
     </div>
   )

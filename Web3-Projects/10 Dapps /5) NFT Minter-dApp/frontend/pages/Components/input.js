@@ -28,11 +28,9 @@ const storeNFT = async(blob) => {
         description,
     })
 
-    console.log(token);
-    setMetaDataURL(token.ipfs) ;
-    console.log(token.url) ;
+    console.log(token.url);
+    setMetaDataURL(token.url) ;
     return token.url ;
-    console.log("end")
 }
   
   var FormData = require('form-data');
