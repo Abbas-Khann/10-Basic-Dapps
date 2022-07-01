@@ -63,14 +63,14 @@ const storeNFT = async(blob) => {
 
  return (
     <div
-    className='w-11/12 mx-auto '
+    className='w-11/12 mx-auto mb-4'
     >
     
-    {/* <input 
+    <input 
      className="text-xl p-1 m-2 rounded ml-12 text-center"
      type="text" id="name" placeholder='Name Your NFT'/>
     <input className='text-xl p-1 m-2 rounded text-center'
-     type="text" id="description" placeholder="Describe Your NFT" />  */}
+     type="text" id="description" placeholder="Describe Your NFT" /> 
     <input 
     className='ml-12'
     type="file" name='image' onChange={onFileChange}
@@ -78,7 +78,7 @@ const storeNFT = async(blob) => {
     />
     {/* <p>{metaData}</p> */}
     <button 
-    className='bg-red-200 py-1 px-3 rounded'
+    className='inline-block px-8 py-2.5 bg-sky-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out'
     onClick={submitFileData}
     >
     Submit</button>
