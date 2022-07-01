@@ -27,9 +27,9 @@ const Home = () => {
   //   signerOrProvider: signer || provider,
   // })
   const mint = async () => {
-    if (metadataURL !== ""){
+    if (metaDataURL !== ""){
 
-      const tx = await contract.mintNFT(metadataURL) ;
+      const tx = await contract.mintNFT(metaDataURL) ;
       await tx.wait();
 
       toast.success(`NFT minted Successfully`);
