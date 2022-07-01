@@ -1,69 +1,73 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 // Import the NFTStorage class and File constructor from the 'nft.storage' package
-// import { NFTStorage } from 'nft.storage';
-// const NFT_STORAGE_KEY = process.env.NFT_KEY
+import { NFTStorage, File } from 'nft.storage';
+import { NFT_KEY } from '../../env';
 import { toast } from 'react-toastify';
-
-import nftStorage from './nftstorage'
+import Axios from 'axios'
 
 const Input = (props) => {
-  const [metaData, setMetaData] = useState("");
+  const {setMetaDataURL} = props
+
   const [img, setImg] = useState("")
-  // const [text,setText] = useState()
- 
     /**
   *
   * @param {string} image path to an image file
   * @param {string} name a name for the NFT
   * @param {string} description a text description for the NFT
   */
-// const storeNFT = (img) => {
-//     console.log("start")
-//     // create a new NFTStorage client using our API key
-//     const nftstorage = new NFTStorage({ token: NFT_STORAGE_KEY })
+const storeNFT = async(blob) => {
+    // create a new NFTStorage client using our API key
+    const nftstorage = new NFTStorage({ token: NFT_KEY })
+    const description = "This is a beautiful and sweet memory of yours "
 
-//     const name= "Sweet Memory" ;
-//     const description = "This is a beautiful and sweet memory of yours "
-//     console.log("upload")
-//     const image = img 
+    const image = new File([blob],"Sweet Memory")
+    // call client.store, passing in the image & metadata
+    const token = await nftstorage.store({
+        image,
+        name,
+        description,
+    })
 
-//     // call client.store, passing in the image & metadata
-//     // const token = nftstorage.store({
-//     //     image,
-//     //     name,
-//     //     description,
-//     // })
+    console.log(token);
+    setMetaDataURL(token.ipfs) ;
+    console.log(token.url) ;
+    return token.url ;
+    console.log("end")
+}
+  
+  var FormData = require('form-data');
+  let formData = new FormData();
 
-//     console.log("completed")
-
-//     // setMetaData(token.ipfs) ;
-//     // return token.url ;
-//     // console.log(token.ipfs) ;
-//     console.log("end")
-// }
-  // // Handles file upload event and updates state
-  // function handleUpload(event) {
-  //   setFile(event.target.files[0]);
-  //   console.log("end");
-  // }
-
-  const onImageChange = (e) => {
+  const onFileChange = (e) => {
+    console.log(e.target.files[0])
+    if(e.target && e.target.files[0]) {
+      formData.append('file', e.target.files[0])
+    }
+    console.log("onfilechange", formData)
     const [file] = e.target.files;
-    setImg(URL.createObjectURL(file));
-    console.log(img, "hereeeee");
-  };
+    console.log(URL.createObjectURL(file)) ;
+    setImg(URL.createObjectURL(file))
+  }
 
-  const handleForm = e => {
-    e.preventDefault();
+  const submitFileData = () => {
+    console.log("form data", formData);
+    const token = storeNFT(img);
+    // Axios.post('https://v2.convertapi.com/upload',
+    // { formData }
+    // )
+    // .then(res => {
+    //   console.log(res)
+    // })
+    // .catch(err => {
+    //   console.error(err)
+    // })
   }
 
  return (
     <div
     className='w-11/12 mx-auto '
     >
-    <form 
-    onChange={handleForm}
-    >
+    
     {/* <input 
      className="text-xl p-1 m-2 rounded ml-12 text-center"
      type="text" id="name" placeholder='Name Your NFT'/>
@@ -71,13 +75,16 @@ const Input = (props) => {
      type="text" id="description" placeholder="Describe Your NFT" />  */}
     <input 
     className='ml-12'
-    type="file" id="image" onChange={onImageChange} accept="image/png, image/jpeg"/>
-    <img src={img} alt="" />
-    <p>{metaData}</p>
+    type="file" name='image' onChange={onFileChange}
+    
+    />
+    {/* <p>{metaData}</p> */}
     <button 
-    className='bg-red-200 py-1 px-3 rounded' onClick={nftStorage(img)}
-    type="button">Submit</button> 
-    </form>
+    className='bg-red-200 py-1 px-3 rounded'
+    onClick={submitFileData}
+    >
+    Submit</button>
+    <img src={img} alt="" />
     </div>
   )
 }
