@@ -21,7 +21,7 @@ const Button = ({metaDataURL, setMinted}) => {
       await tx.wait();
       toast.success('🦄 NFT minted Successfully!');
       console.log(`NFT minted Successfully`);
-      setMinted(true);      
+      setMinted(true);
     }
     else
     {
