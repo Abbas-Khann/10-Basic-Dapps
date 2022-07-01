@@ -12,6 +12,7 @@ import Button from './Components/Button';
 const Home = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [metaDataURL,setMetaDataURL] = useState("");
+  const [trackImage, setTrackImage] = useState(false)
 
   const provider = useProvider();
   const {data: signer, isError, isLoading} = useSigner();
@@ -52,7 +53,7 @@ const Home = () => {
 
     
   return (
-    <div className={`${darkMode ? `bg-[#10172a]` : `bg-gradient-to-l from-sky-500 to-emerald-200`} flex flex-col items-center justify-start gap-2 h-screen`} >
+    <div className={`${darkMode ? `bg-[#10172a]` : `bg-gradient-to-l from-sky-500 to-emerald-200`} flex flex-col items-center justify-start gap-2 ${trackImage ? `h-fit` : `h-screen`}`} >
       <Navbar 
       darkMode={darkMode}
       toggleDarkMode={toggleDarkMode}
@@ -66,8 +67,9 @@ const Home = () => {
       
       <Input
       setMetaDataURL={setMetaDataURL}
+      setTrackImage={setTrackImage}
       />
-        <Button />
+      {trackImage && <Button />}
      
       </div>
     </div>

@@ -6,8 +6,7 @@ import { toast } from 'react-toastify';
 import Axios from 'axios'
 
 const Input = (props) => {
-  const {setMetaDataURL} = props
-
+  const {setMetaDataURL, setTrackImage} = props
   const [img, setImg] = useState("")
     /**
   *
@@ -37,13 +36,14 @@ const storeNFT = async(blob) => {
   let formData = new FormData();
 
   const onFileChange = (e) => {
-    console.log(e.target.files[0])
+    console.log("Image Uploaded", e.target.files[0])
     if(e.target && e.target.files[0]) {
       formData.append('file', e.target.files[0])
+      setTrackImage(true)
     }
     console.log("onfilechange", formData)
     const [file] = e.target.files;
-    console.log(URL.createObjectURL(file)) ;
+    console.log("image here", URL.createObjectURL(file)) ;
     setImg(URL.createObjectURL(file))
   }
 
