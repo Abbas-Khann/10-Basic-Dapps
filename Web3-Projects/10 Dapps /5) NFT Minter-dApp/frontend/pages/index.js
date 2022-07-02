@@ -8,6 +8,7 @@ import Confetti from "react-confetti";
 
 const Home = () => {
   const [darkMode, setDarkMode] = useState(false);
+  // state to track the metaData
   const [metaDataURL, setMetaDataURL] = useState("");
   const [trackImage, setTrackImage] = useState(false);
   const [minted, setMinted] = useState(false);
