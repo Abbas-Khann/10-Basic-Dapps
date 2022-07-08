@@ -48,7 +48,7 @@ contract Voting {
         candidates[candidatesCount] = Candidate(_candidateName, candidatesCount, 0);
     }
 
-    // add payable functionality afterwards
+    // add payable functionality 
     function vote(uint _id) public payable {
         require(msg.value > 0.0000001 ether, "You don't have enough in your wallet to vote for your favorite Leader");
         require(!voters[msg.sender], "You have already voted once!");
