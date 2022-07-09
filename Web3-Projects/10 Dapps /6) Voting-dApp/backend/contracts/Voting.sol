@@ -10,8 +10,7 @@
     4. We should have a candidates count function to get the count of the candidates
     5. voting function where people can vote based off of the id of the candidate
     6. Leading Candidate function to get the candidate with most votes and the name of the candidate
-    7. Candidates shouldn't be able to vote for themselves
-    8. people shouldn't be able to vote more than once
+    7. people shouldn't be able to vote more than once
 
 */
 
