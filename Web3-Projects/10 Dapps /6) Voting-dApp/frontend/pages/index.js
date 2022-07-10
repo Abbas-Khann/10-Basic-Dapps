@@ -9,9 +9,11 @@ const Home = () => {
   }
   
   return (
-    <div
-    className='bg-gradient-to-l from-sky-500 to-emerald-200 h-screen'>
-
+    <main
+    className={`${darkMode && 'dark'} bg-gradient-to-l from-sky-500 to-emerald-200 h-screen`}>
+      <div
+      className='dark:bg-[#10172a] h-screen'
+      >
       <Navbar 
       darkMode={darkMode}
       toggleDarkMode={toggleDarkMode}
@@ -51,27 +53,28 @@ const Home = () => {
       <h2 className='text-3xl text-center text-white'>Select the candidate and click the vote button</h2>
       <div className='flex m-5 items-center'>
 
-        <p className='text-2xl'>Select ID</p>
+        <p className='text-2xl dark:text-white'>Select ID</p>
       <select className='px-3 py-2 mx-2'>
         <option>1</option>
         <option>2</option>
       </select>
-        <button className='bg-fuchsia-400 px-10 py-2 rounded text-xl'>Vote</button>
+        <button className='bg-fuchsia-400 px-10 py-2 rounded text-xl dark:text-white'>Vote</button>
       </div>
-      <div className='w-6/12 flex flex-col items-center py-4'>
+      <div className='w-6/12 flex flex-col items-center py-4 dark:text-white'>
        <h2 className='text-3xl text-center text-white py-2'>Find the leading Candidate</h2>
        <button className='bg-gradient-to-l from-rose-300 to-pink-500 px-6 py-2 rounded text-xl py-2'>Leading Candidate</button>
        <p className='text-xl py-2'>Name: Orange Julius</p>
        <p className='text-xl py-2'>Votes: 2</p>
       </div>
       </div>
-      <div className='w-6/12 flex flex-col items-center py-4'>
+      <div className='w-6/12 flex flex-col items-center py-4 dark:text-white'>
         <h1 className='text-3xl text-white'>Addresses of People who submitted their votes</h1>
         <h1 className='text-xl py-1'>0x5B38Da6a701c568545dCfcB03FcB875f56beddC4</h1>
         <h1 className='text-xl py-1'>0x5B38Da6a701c568545dCfcB03FcB875f56beddC4</h1>
       </div>
       </section>
-    </div>
+        </div>
+    </main>
   )
 }
 
