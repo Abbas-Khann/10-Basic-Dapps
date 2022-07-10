@@ -1,12 +1,15 @@
 import React, {useState} from 'react'
 import Navbar from './Components/Navbar'
 
+
 const Home = () => {
 
   const [darkMode, setDarkMode] = useState(false);
   const toggleDarkMode = () => {
     setDarkMode(prevMode => !prevMode)
   }
+
+
   
   return (
     <main
