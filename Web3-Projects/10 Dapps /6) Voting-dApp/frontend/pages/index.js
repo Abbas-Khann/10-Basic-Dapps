@@ -106,7 +106,6 @@ const Home = () => {
   // const firstCandidateInfo = firstCandidateData.map((item) => {
   //   return <table name={item.name} />
   // })
-
   const allVoters = votersAddresses.map((address) => {
     return <h1 className='text-xl py-1'>{address}</h1>
   })
