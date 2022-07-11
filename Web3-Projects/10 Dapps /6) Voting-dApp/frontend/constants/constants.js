@@ -1,4 +1,4 @@
-export const VOTING_DAPP_ADDRESS = "0x28BF97A659075E178bB9Ad53e73E90665e0A6Acb"
+export const VOTING_DAPP_ADDRESS = "0x5b704A50cB150C49D43929953E12F790f83EBF2a"
 export const VOTING_DAPP_ABI = [
     {
       "inputs": [],
@@ -127,7 +127,7 @@ export const VOTING_DAPP_ABI = [
       ],
       "name": "vote",
       "outputs": [],
-      "stateMutability": "payable",
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -162,4 +162,4 @@ export const VOTING_DAPP_ABI = [
       "stateMutability": "view",
       "type": "function"
     }
-  ];
+  ]
