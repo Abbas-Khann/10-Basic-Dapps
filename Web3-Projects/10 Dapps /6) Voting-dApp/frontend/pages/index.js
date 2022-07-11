@@ -130,7 +130,7 @@ const Home = () => {
   }, [])
   return (
     <main
-    className={`${darkMode && 'dark'}  bg-[#495C83] h-screen`}>
+    className={`${darkMode && 'dark'}  bg-[#495C83] h-screen `}>
       <div
       className='dark:bg-[#10172a] h-screen'
       >
