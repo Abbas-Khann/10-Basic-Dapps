@@ -6,8 +6,6 @@ import { useContract, useProvider, useSigner } from 'wagmi';
 import { utils } from 'ethers';
 
 
-
-
 const Home = () => {
 
   const [darkMode, setDarkMode] = useState(true);
@@ -121,7 +119,7 @@ const Home = () => {
   }
 
   useEffect(() => {
-    getLeadingCandidate()
+    // getLeadingCandidate()
     getFirstCandidateData()
     getSecondCandidateData()
 
@@ -132,7 +130,7 @@ const Home = () => {
   }, [])
   return (
     <main
-    className={`${darkMode && 'dark'} bg-gradient-to-l from-sky-500 to-emerald-200 h-screen`}>
+    className={`${darkMode && 'dark'}  bg-[#495C83] h-screen`}>
       <div
       className='dark:bg-[#10172a] h-screen'
       >

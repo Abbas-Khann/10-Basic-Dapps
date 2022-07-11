@@ -3,7 +3,7 @@
 // We will write a voting smart contract where people can vote between two candidates
 
 /*
-    --> Requirements 
+    --> Requirements
     1. We should have a struct to store the Candidate's name, id and votes_count
     2. We should have another struct to store the Candidate with Lead which should have the name and votes_count property
     3. We need to set up two candidates in our constructor initially through add function
