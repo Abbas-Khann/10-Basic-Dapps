@@ -8,8 +8,10 @@ const Home = () => {
   const [darkMode, setDarkMode] = useState(true);
   const [amount, setAmount] = useState(0);
   const [votersAddresses, setVotersAddresses] = useState([]);
-  const [id, setId] = useState(0);
-  const [votes , setVotes] = useState(0)
+  const[firstCandidateName, setFirstCandidateName] = useState('')
+  const[secondCandidateName, setSecondCandidateName] = useState('')
+  const[firstCandidateVotes, setFirstCandidateVotes] = useState(0)
+  const[secondCandidateVotes, setSecondCandidateVotes] = useState(1)
 
 const provider = useProvider();
   const {data: signer, isLoading} = useSigner();
@@ -20,32 +22,50 @@ const provider = useProvider();
   })
 
 
-  const getVote = async(id) => {
+  const getFirstCandidateVotes = async(id) => {
     try{
       console.log("Getting Votes");
-      const votes = await contract.countVote(id).then((vote) => {
+      const votes = await contract.countVote(0).then((vote) => {
+        return parseInt(vote._hex);
+      })
+      setFirstCandidateVotes(votes);
+    }
+    catch(err) {
+      console.error(err);
+    }
+  }
+  const getSecondCandidateVotes = async(id) => {
+    try{
+      console.log("Getting Votes");
+      const votes = await contract.countVote(1).then((vote) => {
         return parseInt(vote._hex)
       })
-      console.log("Votes Fetched: ", votes) ;
-      setVotes(votes) ;
+      setSecondCandidateVotes(votes);
     }
     catch(err) {
       console.error(err);
     }
   }
 
-  const getCandidate = async(id) => {
+  const getFirstCandidateName = async(id) => {
     try{
-      console.log("fetching Name ... ")
-      const candidateName = await contract.getCandidate(id);
-      console.log(candidateName)
-      console.log("Fetched")
+      const candidate = await contract.getCandidate(0);
+      setFirstCandidateName(candidate)
     }
     catch(err){
       console.error(err) ;
     }
   }
 
+  const getSecondCandidateName = async(id) => {
+    try{
+      const candidate = await contract.getCandidate(1);
+      setSecondCandidateName(candidate)
+    }
+    catch(err){
+      console.error(err) ;
+    }
+  }
 
   const voteForCandidate = async (id) => {
     try{
@@ -65,6 +85,9 @@ const provider = useProvider();
       const voters = await contract.getAddressesArray();
 
       setVotersAddresses(voters)
+      console.log("voters", voters)
+      getFirstCandidateVotes(0);
+      getSecondCandidateVotes(1);
     }
     catch(err) {
       console.error(err)
@@ -81,19 +104,16 @@ const provider = useProvider();
 
   const handleVoting = (event) => {
     const getValue = event.target.value;
-    const changeToInteger = parseInt(getValue);
+    const changeToInteger = parseInt(getValue - 1);
     setAmount(changeToInteger)
-  }
-
-  const handleId = event => {
-    const getValue = event.target.value;
-    const changeToInteger = parseInt(getValue);
-    setId(changeToInteger)
+    console.log(amount)
   }
 
   useEffect(() => {
-    getVote(id);
-    getCandidate(id);
+    getFirstCandidateVotes(0);
+    getSecondCandidateVotes(1);
+    getFirstCandidateName(0);
+    getSecondCandidateName(1);
     getVotersAddresses();
   }, [])
   return (
@@ -113,7 +133,7 @@ const provider = useProvider();
       >
      <table className='sm:w-8/12 w-6/12 text-sm	sm:text-xl'>
       <tbody className='flex items-center justify-around bg-white rounded m-4'>
-        <td className='  p-2 ml-4'>ID</td>
+        <td className='  p-2 ml-4'>#</td>
         <td className='mr-16 font-bold'>Candidates Name</td>
         <img src="https://img.icons8.com/ios/48/000000/name--v1.png"/>
 
@@ -124,17 +144,17 @@ const provider = useProvider();
         <table className='sm:w-8/12 text-2xl'>
       <tbody className='flex items-center justify-evenly bg-white rounded m-4'>
         <td className='  p-2'>1</td>
-        <td className='mr-16 font-bold'>Orange Julius</td>
+        <td className='mr-16 font-bold'>{firstCandidateName}</td>
         <img src="https://img.icons8.com/color/48/000000/donald-trump.png"/>
-        <td className=' '>1</td>
+        <td className=' '>{firstCandidateVotes}</td>
       </tbody>
      </table>
      <table className='sm:w-8/12 text-2xl'>
       <tbody className='flex items-center justify-evenly bg-white rounded m-4'>
         <td className=' p-2'>2</td>
-        <td className='mr-16 font-bold'>Stuttering Joe</td>
+        <td className='mr-16 font-bold'>{secondCandidateName}</td>
         <img src="https://img.icons8.com/color/48/000000/joe-biden.png"/>
-        <td className=' '>2</td>
+        <td className=' '>{secondCandidateVotes}</td>
       </tbody>
      </table>
       </div>
