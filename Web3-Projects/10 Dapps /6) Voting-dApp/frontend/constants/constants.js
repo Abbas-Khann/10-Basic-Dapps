@@ -1,4 +1,4 @@
-export const VOTING_DAPP_ADDRESS = "0xc0E78E928B8A519ED28c4f97AE5Be90cE74c6aFD"
+export const VOTING_DAPP_ADDRESS = "0xaf5a7a4f7D1F4e2f9C605524f93A60fD23DA5eeD"
 export const VOTING_DAPP_ABI = [
   {
     "inputs": [],

@@ -36,7 +36,7 @@ contract Voting {
     }
 
     function vote(uint _id) public {
-        // require(!voters[msg.sender], "You have already voted once!");
+        require(!voters[msg.sender], "You have already voted once!");
         require(_id >= 0 && _id <= candidatesCount);
         voters[msg.sender] = true;
         candidates[_id].votes_count++; 
