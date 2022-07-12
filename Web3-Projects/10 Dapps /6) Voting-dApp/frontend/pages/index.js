@@ -118,7 +118,7 @@ const provider = useProvider();
   }, [])
   return (
     <main
-    className={`${darkMode && 'dark'}  bg-[#495C83] h-screen `}>
+    className={`${darkMode && 'dark'}  bg-[#516BEB] h-screen `}>
       <div
       className='dark:bg-[#10172a] h-screen'
       >
@@ -126,8 +126,8 @@ const provider = useProvider();
       darkMode={darkMode}
       toggleDarkMode={toggleDarkMode}
       />
-      <div className='bg-[#C8B6E2] '> 
-      <h1 className=' text-center text-4xl font-bold text-gray-900  '>Candidates</h1>
+      <div className=''> 
+      <h1 className=' text-center text-4xl font-bold text-gray-900 m-6 dark:text-white'>Candidates</h1>
       <div
       className='flex flex-col items-center justify-between max-w-4xl rounded mx-auto'
       >
@@ -159,17 +159,17 @@ const provider = useProvider();
      </table>
       </div>
       </div>
-      <section className='flex'>
+      <section className='flex py-10'>
       <div className='flex flex-col items-center justify-center w-6/12'>
       <h2 className='text-3xl text-center text-white'>Select the candidate and click the vote button</h2>
       <div className='flex m-5 items-center'>
 
         <p className='text-2xl dark:text-white'>Select ID</p>
-      <select className='px-3 py-2 mx-2' onChange={handleVoting}>
+      <select className='px-3 py-2 mx-2 rounded ' onChange={handleVoting}>
         <option>1</option>
         <option>2</option>
       </select>
-        <button className='bg-fuchsia-400 px-10 py-2 rounded text-xl dark:text-white'
+        <button className='bg-gradient-to-l from-[#FDF6F0] to-[#867AE9] shadow-lg hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none px-10 py-2 rounded text-xl dark:text-white'
         onClick={() => voteForCandidate(amount)}
         >Vote</button>
       </div>
