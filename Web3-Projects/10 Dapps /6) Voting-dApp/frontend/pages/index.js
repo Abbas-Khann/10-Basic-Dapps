@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react'
 import Navbar from './Components/Navbar'
 import { VOTING_DAPP_ADDRESS, VOTING_DAPP_ABI } from '../constants/constants';
 import { useContract, useProvider, useSigner } from 'wagmi';
-import { utils } from 'ethers';
 
 const Home = () => {
 
