@@ -19,25 +19,25 @@ const Navbar = (props) => {
         </style>
       </Head>
       <nav
-        className={`py-4  ${
+        className={`py-4   ${
           darkMode
             ? `bg-gradient-to-r from-sky-600 to-indigo-600`
-            : `bg-gradient-to-r from-cyan-400 to-blue-500`
+            : `bg-[#FDF6F0]`
         } `}
       >
-        <div className="flex items-center justify-around">
+        <div className=" px-16 flex items-center justify-between text-[#0C1E36] text-xl md:text-2xl">
           {darkMode ? (
             <BsMoon
-              className="cursor-pointer text-4xl mr-6 text-white"
+              className="cursor-pointer   "
               onClick={toggleDarkMode}
             />
           ) : (
             <CgSun
-              className="cursor-pointer text-4xl mr-6 text-white"
+              className="cursor-pointer   "
               onClick={toggleDarkMode}
             />
           )}
-          <h3 className="text-4xl text-white">Decentralized Voting App</h3>
+          <h3 className="font-bold ">Decentralized Voting App</h3>
           <ConnectButton
             showBalance={false}
             accountStatus={{

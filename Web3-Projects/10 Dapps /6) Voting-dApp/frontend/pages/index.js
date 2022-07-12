@@ -1,19 +1,19 @@
 import React, {useState, useEffect} from 'react'
 import Navbar from './Components/Navbar'
-import table from './Components/table';
 import { VOTING_DAPP_ADDRESS, VOTING_DAPP_ABI } from '../constants/constants';
 import { useContract, useProvider, useSigner } from 'wagmi';
 import { utils } from 'ethers';
-
+ 
+// I need to be able to fetch the ID and render the amount of votes each candidate has got
+// Test it with payable
 
 const Home = () => {
 
   const [darkMode, setDarkMode] = useState(true);
   const [amount, setAmount] = useState(0);
   const [votersAddresses, setVotersAddresses] = useState([])
-  const [firstCandidateData, setFirstCandidateData] = useState()
-  const [secondCandidateData, setSecondCandidateData] = useState([])
-  
+  const [candidatesInfo, setCandidatesInfo] = useState()
+
   // const votingFixedValue = 0.1;
 
 
@@ -25,7 +25,30 @@ const Home = () => {
     signerOrProvider: signer || provider
   })
 
-  
+  const fetchCandidatesData = async () => {
+    try{
+      let arr = [];
+      for(let i = 0; i < 2; i++) {
+        const candidates = await contract.candidates(i)
+        // console.log("candidate Var", candidates)
+        .then((candidate) => {
+          arr = [
+            ...arr,
+            {id: i + 1, name: candidate[0], votes: candidate[1]},
+          ]
+          setCandidatesInfo(arr);
+        })
+      }
+    }
+    catch(err){
+      console.error(err)
+    } 
+  }
+
+
+  console.log(candidatesInfo)
+
+
   const voteForCandidate = async (id) => {
     try{
       // const value = 0.2;
@@ -57,53 +80,6 @@ const Home = () => {
     }
   }
 
-  const getFirstCandidateData = async () => {
-    try{
-      const candidateData = await contract.candidates(1);
-
-      setFirstCandidateData(candidateData)
-    }
-    catch(err) {
-      console.error(err);
-    }
-  }
-
-  const getSecondCandidateData = async () => {
-    try{
-      const candidateData = await contract.candidates(2);
-
-      setSecondCandidateData(candidateData)
-    }
-    catch(err) {
-      console.error(err);
-    }
-  }
-
-  const getLeadingCandidate = async () => {
-    try{
-
-      const leader = await contract.leader();
-      
-      const setLeadingCandidate = leader;
-      await setLeadingCandidate;
-      console.log("laeder", leader)
-      console.log("setLeadingCandidate", setLeadingCandidate)
-    }
-    catch(err) {
-      console.error(err)
-    }
-  }
-  
-  // console.log("LLLLLLL",leadingCandidate)
-
-  
-
-  // console.log("fetching mapping", firstCandidateData)
-  // console.log("fetching mapping", secondCandidateData)
-
-  // const firstCandidateInfo = firstCandidateData.map((item) => {
-  //   return <table name={item.name} />
-  // })
   const allVoters = votersAddresses.map((address) => {
     return <h1 className='text-xl py-1'>{address}</h1>
   })
@@ -119,13 +95,7 @@ const Home = () => {
   }
 
   useEffect(() => {
-    // getLeadingCandidate()
-    getFirstCandidateData()
-    getSecondCandidateData()
-
-  }, [])
-
-  useEffect(() => {
+    fetchCandidatesData();
       getVotersAddresses();
   }, [])
   return (
@@ -138,48 +108,49 @@ const Home = () => {
       darkMode={darkMode}
       toggleDarkMode={toggleDarkMode}
       />
-      <h1 className='text-4xl text-center bg-gradient-to-l from-indigo-500 to-indigo-700 text-white mt-4 p-4 rounded w-2/12 mx-auto'>Candidates</h1>
+      <div className='bg-[#C8B6E2] '> 
+      <h1 className=' text-center text-4xl font-bold text-gray-900  '>Candidates</h1>
       <div
-      className='flex flex-col items-center justify-between m-4 max-w-4xl rounded mx-auto'
+      className='flex flex-col items-center justify-between max-w-4xl rounded mx-auto'
       >
-     <table className='w-8/12'>
+     <table className='sm:w-8/12 w-6/12 text-sm	sm:text-xl'>
       <tbody className='flex items-center justify-around bg-white rounded m-4'>
-        <td className=' text-2xl p-2 ml-4'>ID</td>
-        <td className='mr-16 text-2xl'>Name</td>
+        <td className='  p-2 ml-4'>ID</td>
+        <td className='mr-16 font-bold'>Candidates Name</td>
         <img src="https://img.icons8.com/ios/48/000000/name--v1.png"/>
 
-        <td className=' text-2xl'>Votes</td>
+        <td>Votes</td>
       </tbody>
      </table>
-     {/* {firstCandidateInfo} */}
-     {/* {
-      firstCandidateData.map((item) => {
-        return <table className='w-8/12'>
+     {/* {setInterval(() => {
+       candidatesInfo.map((item) => {
+        return <table className='sm:w-8/12 text-2xl'>
+        <tbody className='flex items-center justify-evenly bg-white rounded m-4'>
+          <td className='  p-2'>1</td>
+          <td className='mr-16 font-bold'>Orange Julius</td>
+          <img src="https://img.icons8.com/color/48/000000/donald-trump.png"/>
+          <td className=' '>sds</td>
+        </tbody>
+       </table>
+       })
+    }, 5000)} */}
+        <table className='sm:w-8/12 text-2xl'>
       <tbody className='flex items-center justify-evenly bg-white rounded m-4'>
-        <td className=' text-2xl p-2'></td>
-        <td className='mr-16 text-2xl'>{item[0]}</td>
+        <td className='  p-2'>1</td>
+        <td className='mr-16 font-bold'>Orange Julius</td>
         <img src="https://img.icons8.com/color/48/000000/donald-trump.png"/>
-        <td className=' text-2xl'></td>
+        <td className=' '>1</td>
       </tbody>
      </table>
-    })
-    } */}
-    <table className='w-8/12'>
+     <table className='sm:w-8/12 text-2xl'>
       <tbody className='flex items-center justify-evenly bg-white rounded m-4'>
-        <td className=' text-2xl p-2'>1</td>
-        <td className='mr-16 text-2xl'>Orange Julius</td>
-        <img src="https://img.icons8.com/color/48/000000/donald-trump.png"/>
-        <td className=' text-2xl'>1</td>
-      </tbody>
-     </table>
-     <table className='w-8/12'>
-      <tbody className='flex items-center justify-evenly bg-white rounded m-4'>
-        <td className=' text-2xl p-2'>2</td>
-        <td className='mr-16 text-2xl'>Stuttering Joe</td>
+        <td className=' p-2'>2</td>
+        <td className='mr-16 font-bold'>Stuttering Joe</td>
         <img src="https://img.icons8.com/color/48/000000/joe-biden.png"/>
-        <td className=' text-2xl'>2</td>
+        <td className=' '>2</td>
       </tbody>
      </table>
+      </div>
       </div>
       <section className='flex'>
       <div className='flex flex-col items-center justify-center w-6/12'>
@@ -195,18 +166,10 @@ const Home = () => {
         onClick={() => voteForCandidate(amount)}
         >Vote</button>
       </div>
-      <div className='w-6/12 flex flex-col items-center py-4 dark:text-white'>
-       <h2 className='text-3xl text-center text-white py-2'>Find the leading Candidate</h2>
-       <button className='bg-gradient-to-l from-rose-300 to-pink-500 px-6 py-2 rounded text-xl py-2'>Leading Candidate</button>
-       <p className='text-xl py-2'>Name: Orange Julius</p>
-       <p className='text-xl py-2'>Votes: 2</p>
-      </div>
       </div>
       <div className='w-6/12 flex flex-col items-center py-4 dark:text-white'>
         <h1 className='text-3xl text-white'>Addresses of People who submitted their votes</h1>
         {allVoters}
-        {/* <h1 className='text-xl py-1'>0x5B38Da6a701c568545dCfcB03FcB875f56beddC4</h1>
-        <h1 className='text-xl py-1'>0x5B38Da6a701c568545dCfcB03FcB875f56beddC4</h1> */}
       </div>
       </section>
         </div>

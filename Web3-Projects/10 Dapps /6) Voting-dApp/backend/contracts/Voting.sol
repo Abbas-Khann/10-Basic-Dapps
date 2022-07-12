@@ -2,56 +2,40 @@
 
 // We will write a voting smart contract where people can vote between two candidates
 
-/*
-    --> Requirements
-    1. We should have a struct to store the Candidate's name, id and votes_count
-    2. We should have another struct to store the Candidate with Lead which should have the name and votes_count property
-    3. We need to set up two candidates in our constructor initially through add function
-    4. We should have a candidates count function to get the count of the candidates
-    5. voting function where people can vote based off of the id of the candidate
-    6. Leading Candidate function to get the candidate with most votes and the name of the candidate
-    7. people shouldn't be able to vote more than once
-
-*/
-
 pragma solidity ^0.8.0;
 
 contract Voting {
     
     struct Candidate {
         string name;
-        uint256 id;
         uint256 votes_count;
     }
-
-    struct LeadingCandidate {
-        string name;
-        uint maximumVotes;
-    }
-
-    LeadingCandidate public leading_candidate;
 
     uint public candidatesCount;
     address public voter;
     address[] public addressesArray;
-    mapping(uint => Candidate) public candidates;    // let object = { number: Candidate }
+
+    ///  mapping id => Candidate name and Vote count 
+    mapping(uint => Candidate) public candidates;
     mapping(address => bool) public voters;
 
     constructor() {
         addCandidate("Orange Julius");
+        // 0 => Orange Julius
         addCandidate("Stuttering Joe");
+        // 1 => Stuttering Joe
     }
     
-    function addCandidate(string memory _candidateName) private {
-        candidatesCount++;
-        candidates[candidatesCount] = Candidate(_candidateName, candidatesCount, 0);
+    function addCandidate(string memory _candidateName) private returns(uint id){
+        uint256 _id = candidatesCount ;
+        candidates[_id] = Candidate(_candidateName, 0);
+        candidatesCount++ ;
+        return _id ;
     }
 
-    // add payable functionality 
     function vote(uint _id) public {
-        // require(msg.value > 0.1 ether, "You don't have enough in your wallet to vote for your favorite Leader");
         require(!voters[msg.sender], "You have already voted once!");
-        require(_id > 0 && _id <= candidatesCount);
+        require(_id >= 0 && _id <= candidatesCount);
         voters[msg.sender] = true;
         candidates[_id].votes_count++; 
         voter = msg.sender;
@@ -66,16 +50,12 @@ contract Voting {
         return addressesArray.length;
     }
 
-    function leader() public {
-        uint256 maxVotes = 0;
-        string memory _name = "";
-        for(uint i = 0; i < 50; i++) {
-            if(maxVotes < candidates[i].votes_count) {
-                maxVotes = candidates[i].votes_count;
-                _name = candidates[i].name;
-            }
-        }
-        leading_candidate = LeadingCandidate(_name, maxVotes);
+    function countVote(uint256 id) public view returns(uint256 votes) {
+        return candidates[id].votes_count;
+    }
+
+    function getCandidate(uint256 id) public view returns(string memory _name) {
+        return candidates[id].name;
     }
 
 }
