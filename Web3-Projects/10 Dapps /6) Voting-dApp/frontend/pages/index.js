@@ -3,21 +3,16 @@ import Navbar from './Components/Navbar'
 import { VOTING_DAPP_ADDRESS, VOTING_DAPP_ABI } from '../constants/constants';
 import { useContract, useProvider, useSigner } from 'wagmi';
 import { utils } from 'ethers';
- 
-// I need to be able to fetch the ID and render the amount of votes each candidate has got
-// Test it with payable
 
 const Home = () => {
 
   const [darkMode, setDarkMode] = useState(true);
   const [amount, setAmount] = useState(0);
-  const [votersAddresses, setVotersAddresses] = useState([])
-  const [candidatesInfo, setCandidatesInfo] = useState()
+  const [votersAddresses, setVotersAddresses] = useState([]);
+  const [id, setId] = useState(0);
+  const [votes , setVotes] = useState(0)
 
-  // const votingFixedValue = 0.1;
-
-
-  const provider = useProvider();
+const provider = useProvider();
   const {data: signer, isLoading} = useSigner();
   const contract = useContract({
     addressOrName: VOTING_DAPP_ADDRESS,
@@ -25,43 +20,40 @@ const Home = () => {
     signerOrProvider: signer || provider
   })
 
-  const fetchCandidatesData = async () => {
+
+  const getVote = async(id) => {
     try{
-      let arr = [];
-      for(let i = 0; i < 2; i++) {
-        const candidates = await contract.candidates(i)
-        // console.log("candidate Var", candidates)
-        .then((candidate) => {
-          arr = [
-            ...arr,
-            {id: i + 1, name: candidate[0], votes: candidate[1]},
-          ]
-          setCandidatesInfo(arr);
-        })
-      }
+      console.log("Getting Votes");
+      const votes = await contract.countVote(id).then((vote) => {
+        return parseInt(vote._hex)
+      })
+      console.log("Votes Fetched: ", votes) ;
+      setVotes(votes) ;
     }
-    catch(err){
-      console.error(err)
-    } 
+    catch(err) {
+      console.error(err);
+    }
   }
 
-
-  console.log(candidatesInfo)
+  const getCandidate = async(id) => {
+    try{
+      console.log("fetching Name ... ")
+      const candidateName = await contract.getCandidate(id);
+      console.log(candidateName)
+      console.log("Fetched")
+    }
+    catch(err){
+      console.error(err) ;
+    }
+  }
 
 
   const voteForCandidate = async (id) => {
     try{
-      // const value = 0.2;
-      // console.log("value in line 1", value)
-      // const valueToInt = parseInt(value);
 
-      // console.log(valueToInt, "os ogura")
-      // const vote = await contract.vote(amount, {value: utils.parseEther(value.toString())});
-      // isLoading = true;
       const vote = await contract.vote(id);
       await vote.wait();
       getVotersAddresses()
-      // isLoading = false;
 
     }
     catch(err){
@@ -94,9 +86,16 @@ const Home = () => {
     setAmount(changeToInteger)
   }
 
+  const handleId = event => {
+    const getValue = event.target.value;
+    const changeToInteger = parseInt(getValue);
+    setId(changeToInteger)
+  }
+
   useEffect(() => {
-    fetchCandidatesData();
-      getVotersAddresses();
+    getVote(id);
+    getCandidate(id);
+    getVotersAddresses();
   }, [])
   return (
     <main
@@ -122,18 +121,7 @@ const Home = () => {
         <td>Votes</td>
       </tbody>
      </table>
-     {/* {setInterval(() => {
-       candidatesInfo.map((item) => {
-        return <table className='sm:w-8/12 text-2xl'>
-        <tbody className='flex items-center justify-evenly bg-white rounded m-4'>
-          <td className='  p-2'>1</td>
-          <td className='mr-16 font-bold'>Orange Julius</td>
-          <img src="https://img.icons8.com/color/48/000000/donald-trump.png"/>
-          <td className=' '>sds</td>
-        </tbody>
-       </table>
-       })
-    }, 5000)} */}
+     {/* Here are the candidates */}
         <table className='sm:w-8/12 text-2xl'>
       <tbody className='flex items-center justify-evenly bg-white rounded m-4'>
         <td className='  p-2'>1</td>

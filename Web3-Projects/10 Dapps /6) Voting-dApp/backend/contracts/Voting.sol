@@ -16,6 +16,8 @@ contract Voting {
     address[] public addressesArray;
 
     ///  mapping id => Candidate name and Vote count 
+
+
     mapping(uint => Candidate) public candidates;
     mapping(address => bool) public voters;
 
