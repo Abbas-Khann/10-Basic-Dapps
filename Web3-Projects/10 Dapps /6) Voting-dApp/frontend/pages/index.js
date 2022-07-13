@@ -22,7 +22,7 @@ const provider = useProvider();
   })
 
 
-  const getFirstCandidateVotes = async(id) => {
+  const getFirstCandidateVotes = async() => {
     try{
       console.log("Getting Votes");
       const votes = await contract.countVote(0).then((vote) => {
@@ -34,7 +34,7 @@ const provider = useProvider();
       console.error(err);
     }
   }
-  const getSecondCandidateVotes = async(id) => {
+  const getSecondCandidateVotes = async() => {
     try{
       console.log("Getting Votes");
       const votes = await contract.countVote(1).then((vote) => {
@@ -47,7 +47,7 @@ const provider = useProvider();
     }
   }
 
-  const getFirstCandidateName = async(id) => {
+  const getFirstCandidateName = async() => {
     try{
       const candidate = await contract.getCandidate(0);
       setFirstCandidateName(candidate)
@@ -57,7 +57,7 @@ const provider = useProvider();
     }
   }
 
-  const getSecondCandidateName = async(id) => {
+  const getSecondCandidateName = async() => {
     try{
       const candidate = await contract.getCandidate(1);
       setSecondCandidateName(candidate)
@@ -76,7 +76,7 @@ const provider = useProvider();
 
     }
     catch(err){
-      console.error("err", err)
+      alert("You have already Voted Once!")
     }
   }
   
@@ -110,10 +110,10 @@ const provider = useProvider();
   }
 
   useEffect(() => {
-    getFirstCandidateVotes(0);
-    getSecondCandidateVotes(1);
-    getFirstCandidateName(0);
-    getSecondCandidateName(1);
+    getFirstCandidateVotes();
+    getSecondCandidateVotes();
+    getFirstCandidateName();
+    getSecondCandidateName();
     getVotersAddresses();
   }, [])
   return (
