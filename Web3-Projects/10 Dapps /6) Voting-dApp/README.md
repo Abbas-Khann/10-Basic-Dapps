@@ -1,1 +1,1 @@
-### Here's what the dApp looks like: [https://youtu.be/7fDpk4VUYf4]
+### [Here's what the dApp looks like](https://youtu.be/7fDpk4VUYf4)
