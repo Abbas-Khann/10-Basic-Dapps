@@ -8,7 +8,7 @@ const { ethers } = require("hardhat");
 
 const main = async () => {
    
-  const ownableContract = await ethers.getContractFactory('Ownable');
+  const ownableContract = await ethers.getContractFactory('Owner');
 
   const deployedOwnableContract = await ownableContract.deploy();
 

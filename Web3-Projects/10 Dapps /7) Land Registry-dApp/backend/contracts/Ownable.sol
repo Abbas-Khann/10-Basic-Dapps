@@ -1,81 +1,61 @@
-// SPDX-License-Identifier: MIT
-// OpenZeppelin Contracts v4.4.1 (access/Ownable.sol)
+// SPDX-License-Identifier: GPL-3.0
 
-pragma solidity ^0.8.0;
+pragma solidity >=0.7.0 <0.9.0;
 
-import "./Context.sol";
+import "hardhat/console.sol";
 
 /**
- * @dev Contract module which provides a basic access control mechanism, where
- * there is an account (an owner) that can be granted exclusive access to
- * specific functions.
- *
- * By default, the owner account will be the one that deploys the contract. This
- * can later be changed with {transferOwnership}.
- *
- * This module is used through inheritance. It will make available the modifier
- * `onlyOwner`, which can be applied to your functions to restrict their use to
- * the owner.
- */
- contract Ownable is Context {
-    address private _owner;
-    address private _previousowner;
+ * @title Owner
+ * @dev Set & change owner
+ */ 
+contract Owner {
 
-    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
-
-    /**
-     * @dev Initializes the contract setting the deployer as the initial owner.
-     */
-    constructor() {
-        _transferOwnership(_msgSender());
-    }
-
-    /**
-     * @dev Returns the address of the current owner.
-     */
-    function owner() public view virtual returns (address) {
-        return _owner;
-    }
-
-    function previousowner() public view virtual returns (address) {
-        return _previousowner;
-    }
-    /**
-     * @dev Throws if called by any account other than the owner.
-     */
-    modifier onlyOwner() {
-        require(owner() == _msgSender(), "Ownable: caller is not the owner");
+    address private owner;
+    address private previousOwner;
+    
+    // event for EVM logging
+    event OwnerSet(address indexed _previousOwner, address indexed newOwner);
+    
+    // modifier to check if caller is owner
+    modifier isOwner() {
+        // If the first argument of 'require' evaluates to 'false', execution terminates and all
+        // changes to the state and to Ether balances are reverted.
+        // This used to consume all gas in old EVM versions, but not anymore.
+        // It is often a good idea to use 'require' to check if functions are called correctly.
+        // As a second argument, you can also provide an explanation about what went wrong.
+        require(msg.sender == owner, "Caller is not owner");
         _;
     }
-
+    
     /**
-     * @dev Leaves the contract without owner. It will not be possible to call
-     * `onlyOwner` functions anymore. Can only be called by the current owner.
-     *
-     * NOTE: Renouncing ownership will leave the contract without an owner,
-     * thereby removing any functionality that is only available to the owner.
+     * @dev Set contract deployer as owner
      */
-    function renounceOwnership() public virtual onlyOwner {
-        _transferOwnership(address(0));
+    constructor() {
+        console.log("Owner contract deployed by:", msg.sender);
+        owner = msg.sender; // 'msg.sender' is sender of current call, contract deployer for a constructor
+        emit OwnerSet(address(0), owner);
     }
 
     /**
-     * @dev Transfers ownership of the contract to a new account (`newOwner`).
-     * Can only be called by the current owner.
+     * @dev Change owner
+     * @param newOwner address of new owner
      */
-    function transferOwnership(address newOwner) public virtual onlyOwner {
-        require(newOwner != address(0), "Ownable: new owner is the zero address");
-        _transferOwnership(newOwner);
+    function changeOwner(address newOwner) public isOwner {
+        emit OwnerSet(owner, newOwner);
+        previousOwner = owner;
+        owner = newOwner;
+
     }
 
     /**
-     * @dev Transfers ownership of the contract to a new account (`newOwner`).
-     * Internal function without access restriction.
+     * @dev Return owner address 
+     * @return address of owner
      */
-    function _transferOwnership(address newOwner) internal virtual {
-        address oldOwner = _owner;
-        _previousowner = _owner;
-        _owner = newOwner;
-        emit OwnershipTransferred(oldOwner, newOwner);
+    function getOwner() external view returns (address) {
+        return owner;
+    }
+
+    function getPreviousOwner() external view returns (address) {
+        return previousOwner;
     }
 }

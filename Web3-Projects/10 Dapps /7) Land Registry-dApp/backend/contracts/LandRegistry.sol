@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 
 import "./Ownable.sol";
 
-contract LandRegistry is Ownable {
+contract LandRegistry is Owner {
     
     string private country;
     string private city;
@@ -11,7 +11,7 @@ contract LandRegistry is Ownable {
     string private latitude;
     string private longitude;
     
-    constructor(string memory _country, string memory _city, string memory _landAddress, string memory _latitude, string memory _longitude) public
+    constructor(string memory _country, string memory _city, string memory _landAddress, string memory _latitude, string memory _longitude)
     {
         country = _country;
         city = _city;
