@@ -3,6 +3,12 @@ import Navbar from "./Components/Navbar"
 import Search from "./Components/Search"
 
 const Home = () => {
+
+  
+
+
+
+
   return (
     <main className="bg-[#10172a]">
       <Navbar />
