@@ -14,7 +14,7 @@ const main = async () => {
 
   await deployedLandRegistryContract.deployed();
 
-  console.log("deploying Contract's Address", deployedLandRegistryContract.address);
+  console.log("deployer Contract's Address", deployedLandRegistryContract.address);
 }
 
 // function invokation and error handling

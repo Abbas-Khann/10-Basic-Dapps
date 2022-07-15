@@ -1,5 +1,5 @@
-export const deployerContractAddress = "0xB0dC22Cbe50ED0f8b802C324202cc6A59Fb6E8Ee";
-export const ownableContractAddress = "0x19A258Cb4d686a7c5e4f7bF7da7Ff7df18a58cb5";
+export const deployerContractAddress = "0xADE2561c2a9FA8581da207E04A43657b3eaEB603";
+export const ownableContractAddress = "0x316aF102C8112Dc83F7a6A089430E72C86241A11";
 
 export const deployerContractABI = [
     {
@@ -146,4 +146,4 @@ export const ownableContractABI = [
       "stateMutability": "view",
       "type": "function"
     }
-]
+  ]

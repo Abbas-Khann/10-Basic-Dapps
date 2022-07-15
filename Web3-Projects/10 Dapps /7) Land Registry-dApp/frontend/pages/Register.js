@@ -5,7 +5,6 @@ import { deployerContractABI, deployerContractAddress } from '../Constants/const
 
 const Register = () => {
 
-  // Wagmi shit bro
   const provider = useProvider();
   const {data: signer} = useSigner();
   const deployerContract = useContract({
