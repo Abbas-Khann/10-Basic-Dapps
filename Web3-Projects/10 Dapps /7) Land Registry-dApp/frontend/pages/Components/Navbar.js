@@ -25,9 +25,7 @@ const Navbar = () => {
         <Link href='/Transfer'>
         <button className='transition ease-in delay-150 hover:bg-slate-900 rounded px-3 sm:text-2xl md:text-3xl'>Transfer Ownership</button>
         </Link>
-        {/* <Link> */}
-        <button className='transition ease-in delay-150 hover:bg-slate-900 rounded px-3 sm:text-2xl md:text-3xl'> <ConnectButton /></button>
-        {/* </Link> */}
+        <button className=''> <ConnectButton accountStatus='avatar' /></button>
       </nav>
       
     </div>
