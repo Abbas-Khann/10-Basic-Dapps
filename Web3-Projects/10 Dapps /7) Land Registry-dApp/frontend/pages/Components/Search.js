@@ -6,7 +6,7 @@ const Search = () => {
         <h1 className='text-center m-4 text-2xl sm:text-3xl'>Search For Registered Land</h1>
         <div className='mx-2 py-4 flex flex-col justify-evenly items-center'>
             <h1 className='sm:text-xl md:text-3xl mb-2'>Search for land by contract</h1>
-            <input className='rounded w-5/12 mt-1 sm:py-2 mb-1'/>
+            <input className='rounded w-5/12 mt-1 sm:py-2 mb-1 text-black'/>
             <button className='bg-indigo-400 rounded ml-2 px-4 mt-2  hover:bg-sky-300 sm:text-2xl md:text-3xl'>Search</button>
         </div>
         <div className='flex items-center justify-center'>

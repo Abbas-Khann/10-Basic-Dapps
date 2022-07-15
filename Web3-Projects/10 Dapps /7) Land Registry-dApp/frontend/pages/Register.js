@@ -15,11 +15,11 @@ const Register = () => {
         <h1 className='sm:text-2xl md:text-3xl m-1'>Location Longitude</h1>
             </div>
             <div className='flex flex-col w-11/12 items-end '>
-        <input className='rounded w-5/12 sm:w-3/12 md:w-3/12 m-2 py-2 px-1' placeholder='country...'/>
-        <input className='rounded w-5/12 sm:w-4/12 md:w-3/12 m-2 py-2 px-1' placeholder='city...'/>
-        <input className='rounded w-5/12 sm:w-4/12 md:w-3/12 m-2 py-2 px-1' placeholder='address...'/>
-        <input className='rounded w-5/12 sm:w-4/12 md:w-3/12 m-2 py-2 px-1' placeholder='latitude...'/>
-        <input className='rounded w-5/12 sm:w-4/12 md:w-3/12 m-2 py-2 px-1' placeholder='longitude...'/>
+        <input className='rounded w-5/12 sm:w-3/12 md:w-3/12 m-2 py-2 px-1 text-black' placeholder='country...'/>
+        <input className='rounded w-5/12 sm:w-4/12 md:w-3/12 m-2 py-2 px-1 text-black' placeholder='city...'/>
+        <input className='rounded w-5/12 sm:w-4/12 md:w-3/12 m-2 py-2 px-1 text-black' placeholder='address...'/>
+        <input className='rounded w-5/12 sm:w-4/12 md:w-3/12 m-2 py-2 px-1 text-black' placeholder='latitude...'/>
+        <input className='rounded w-5/12 sm:w-4/12 md:w-3/12 m-2 py-2 px-1 text-black' placeholder='longitude...'/>
             </div>
         </div>
         <div className='flex items-center justify-center'>

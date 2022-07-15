@@ -14,8 +14,8 @@ const Transfer = () => {
         </div>
         <div className='flex flex-col w-9/12 items-center'>
 
-        <input className='rounded w-5/12 sm:w-4/12 md:w-3/12 m-2 py-2'/>
-        <input className='rounded w-5/12 sm:w-4/12 md:w-3/12 m-2 py-2'/>
+        <input className='rounded w-5/12 sm:w-4/12 md:w-3/12 m-2 py-2 text-black'/>
+        <input className='rounded w-5/12 sm:w-4/12 md:w-3/12 m-2 py-2 text-black'/>
         
         </div>
         </div>
