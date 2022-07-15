@@ -1,6 +1,15 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 const Search = () => {
+  const [country, setCountry] = useState('');
+  const [city, setCity] = useState('');
+  const [contractAddress, setContractAddress] = useState('');
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
+  const [currentOwner, setCurrentOwner] = useState('');
+  const [prevOwner, setPrevOwner] = useState('');
+  
+
   return (
     <div className='w-full'>
         <h1 className='text-center m-4 text-2xl sm:text-3xl'>Search For Registered Land</h1>
