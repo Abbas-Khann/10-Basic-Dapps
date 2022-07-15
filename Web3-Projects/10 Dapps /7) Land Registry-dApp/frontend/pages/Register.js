@@ -1,9 +1,15 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Navbar from './Components/Navbar'
 import { useContract, useSigner, useProvider } from 'wagmi';
 import { deployerContractABI, deployerContractAddress } from '../Constants/constants';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import copy from "copy-to-clipboard"; 
+
 
 const Register = () => {
+
+  // const [copyText, setCopyText] = useState('')
 
   const provider = useProvider();
   const {data: signer} = useSigner();
@@ -34,6 +40,18 @@ console.log(landData)
   })
  }
 
+ const checkingToastify = () => {
+  toast.success('🦄 Wow so easy!', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    });
+ }
+
  //----------------------------------------------------------------
  //CONTRACT INTERACTION
 
@@ -45,14 +63,54 @@ console.log(landData)
 
       createNewLandContract.wait();
 
-      console.log("NewLandContract", createNewLandContract);
+      console.log("Transaction details", createNewLandContract);
+      getNewlyDeployedContractAddress();
 }
-  }catch(err){
+  }
+  catch(err){
     console.log(err)
   }
  }
 
 
+ const getNewlyDeployedContractAddress = async() => {
+  try{
+    const deployedContractAddress = deployerContract.getDeployedContractAddress();
+    await deployedContractAddress;
+    console.log("Address here :", deployedContractAddress)
+    const alertValue = Promise[0]
+    // alert("Contract Address:",alertValue)
+    // copy(alertValue)
+  }
+  catch(err) {
+    console.error(err)
+  }
+ }
+
+ const fetchAllContracts = async () => {
+  try{
+    const allDeployedContracts = deployerContract.getContractAddresses();
+    await allDeployedContracts;
+    console.log("All addresses", allDeployedContracts)
+  }
+  catch(err) {
+    console.error(err)
+  }
+ }
+
+
+ useEffect(() => {
+  checkingToastify()
+    fetchAllContracts();
+ }, [registerData])
+//  const handleCopyText = (e) => {
+//     setCopyText(e.target.value);
+//  }
+
+//  const copyToClipboard = () => {
+//   copy(copyText);
+//   alert("copied to clipboard")
+//  }
 
  //----------------------------------------------------------------
   return (
@@ -78,6 +136,7 @@ console.log(landData)
         <div className='flex items-center justify-center'>
         <button onClick={()=>registerData(landData)} className='bg-blue-400 text-2xl rounded px-4 mt-2 py-2'>Register</button>
         </div>
+        
     </div>
   )
 }
