@@ -78,7 +78,8 @@ console.log(landData)
     const deployedContractAddress = deployerContract.getDeployedContractAddress();
     await deployedContractAddress;
     console.log("Address here :", deployedContractAddress)
-    const alertValue = Promise[0]
+    deployedContractAddress.then((promise) => toast.success(promise) )
+    // console.log("alertValue", alertValue)
     // alert("Contract Address:",alertValue)
     // copy(alertValue)
   }
@@ -102,7 +103,7 @@ console.log(landData)
  useEffect(() => {
   checkingToastify()
     fetchAllContracts();
- }, [registerData])
+ }, [])
 //  const handleCopyText = (e) => {
 //     setCopyText(e.target.value);
 //  }
