@@ -64,12 +64,7 @@ console.log(landData)
     const deployedContractAddress = deployerContract.getDeployedContractAddress();
     await deployedContractAddress;
     console.log("Address here :", deployedContractAddress)
-    
-  //  const resulted =  Promise.resolve(deployedContractAddress)
-  //   // deployedContractAddress.then((response) => response.json())
-  //   // .then((data) => console.log("checking data",data))
-  //   // toast.success('Address copied to clipboard');
-  //  console.log("resulted:",resulted)
+    // deployedContractAddress.then((promise) => navigator.clipboard.writeText(promise))
 
    const copyAddress = await deployedContractAddress.then((promise) => (promise))
     navigator.clipboard.writeText(copyAddress)
@@ -90,12 +85,6 @@ console.log(landData)
     console.error(err)
   }
  }
-
-
- useEffect(() => {
-    // getNewlyDeployedContractAddress(); 
-    // fetchAllContracts();
- }, [])
 
  //----------------------------------------------------------------
   return (
