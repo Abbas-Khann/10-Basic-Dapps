@@ -2,14 +2,14 @@ import React, {useState, useEffect} from 'react'
 import Navbar from './Components/Navbar'
 import { useContract, useSigner, useProvider } from 'wagmi';
 import { deployerContractABI, deployerContractAddress } from '../Constants/constants';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
 const Register = () => {
 
   const provider = useProvider();
-  const {data: signer} = useSigner();
+  const {data: signer, isLoading} = useSigner();
   const deployerContract = useContract({
     addressOrName: deployerContractAddress,
     contractInterface: deployerContractABI,
@@ -45,12 +45,12 @@ console.log(landData)
       if(val.country && val.city && val.address && val.latitude && val.longitude){
   
       const createNewLandContract = await deployerContract.create(val.country, val.city, val.address, val.latitude, val.longitude);
-
-      createNewLandContract.wait();
-
+      isLoading = true;
+      await createNewLandContract.wait();
+      isLoading = false;
       console.log("Transaction details", createNewLandContract);
-      getNewlyDeployedContractAddress();
       fetchAllContracts();
+      getNewlyDeployedContractAddress();
 }
   }
   catch(err){
@@ -59,13 +59,21 @@ console.log(landData)
  }
 
 
- const getNewlyDeployedContractAddress = async() => {
+ const getNewlyDeployedContractAddress = async () => {
   try{
     const deployedContractAddress = deployerContract.getDeployedContractAddress();
     await deployedContractAddress;
     console.log("Address here :", deployedContractAddress)
-    deployedContractAddress.then((promise) => navigator.clipboard.writeText(promise));
-    toast.success('Address copied to clipboard');
+    
+  //  const resulted =  Promise.resolve(deployedContractAddress)
+  //   // deployedContractAddress.then((response) => response.json())
+  //   // .then((data) => console.log("checking data",data))
+  //   // toast.success('Address copied to clipboard');
+  //  console.log("resulted:",resulted)
+
+   const copyAddress = await deployedContractAddress.then((promise) => (promise))
+    navigator.clipboard.writeText(copyAddress)
+    toast.success("Address Copied to Clipboard")
   }
   catch(err) {
     console.error(err)
@@ -85,7 +93,8 @@ console.log(landData)
 
 
  useEffect(() => {
-    fetchAllContracts();
+    // getNewlyDeployedContractAddress(); 
+    // fetchAllContracts();
  }, [])
 
  //----------------------------------------------------------------
