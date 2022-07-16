@@ -9,7 +9,7 @@ import copy from "copy-to-clipboard";
 
 const Register = () => {
 
-  // const [copyText, setCopyText] = useState('')
+  const [copyText, setCopyText] = useState('')
 
   const provider = useProvider();
   const {data: signer} = useSigner();
@@ -78,7 +78,9 @@ console.log(landData)
     const deployedContractAddress = deployerContract.getDeployedContractAddress();
     await deployedContractAddress;
     console.log("Address here :", deployedContractAddress)
-    deployedContractAddress.then((promise) => toast.success(promise) )
+    const addressToCopy = deployedContractAddress.then((promise) => setCopyText(promise));
+    navigator.clipboard.writeText(copyText);
+    toast.success('Address copied to clipboard')
     // console.log("alertValue", alertValue)
     // alert("Contract Address:",alertValue)
     // copy(alertValue)
