@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useProvider, useContract, useSigner } from 'wagmi';
 import { landContractABI } from '../../Constants/constants';
 
@@ -106,10 +106,6 @@ const getPrevOwner = async () => {
     console.log(err)
   }
 }
-
-
-
-
   const handleAddressVal = (e) => {
     setAddressInput(e.target.value)
   }
@@ -125,6 +121,16 @@ function runAllFunctions(){
   getCurrentOwner();
   getPrevOwner();
 }
+
+useEffect(() => {
+  getCountryName();
+  getCityName();
+  getPropertyAddress();
+  getLatitude();
+  getLongitude();
+  getCurrentOwner();
+  getPrevOwner();
+}, [])
   return (
     <div className='w-full '>
         <h1 className='text-center m-4 text-2xl sm:text-3xl'>Search For Registered Land</h1>

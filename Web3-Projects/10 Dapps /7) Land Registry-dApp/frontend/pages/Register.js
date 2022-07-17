@@ -16,8 +16,6 @@ const Register = () => {
     signerOrProvider: signer || provider
   })
 
-
-
  const [landData , setLandData] = useState({
   country:'',
   city:'',
@@ -85,6 +83,10 @@ console.log(landData)
     console.error(err)
   }
  }
+
+ useEffect(() => {
+  fetchAllContracts()
+ })
 
  //----------------------------------------------------------------
   return (
