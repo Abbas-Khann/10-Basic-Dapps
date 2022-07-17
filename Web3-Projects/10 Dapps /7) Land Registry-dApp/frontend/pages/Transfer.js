@@ -78,7 +78,6 @@ const Transfer = () => {
         </div>
         <div className='flex items-center justify-center'>
         <button onClick={() => changeOwner(newOwnerAddress)} className='bg-blue-400 text-2xl rounded px-4 py-2 mt-12'>Transfer</button>
-        <button onClick={getOwner}>owner</button>
         </div>
     </div>
   )

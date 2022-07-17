@@ -130,7 +130,7 @@ useEffect(() => {
   getLongitude();
   getCurrentOwner();
   getPrevOwner();
-}, [])
+}, [runAllFunctions])
   return (
     <div className='w-full '>
         <h1 className='text-center m-4 text-2xl sm:text-3xl'>Search For Registered Land</h1>
