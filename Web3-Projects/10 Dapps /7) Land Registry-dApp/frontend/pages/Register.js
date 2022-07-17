@@ -62,10 +62,10 @@ console.log(landData)
     const deployedContractAddress = deployerContract.getDeployedContractAddress();
     await deployedContractAddress;
     console.log("Address here :", deployedContractAddress)
-    // deployedContractAddress.then((promise) => navigator.clipboard.writeText(promise))
+    deployedContractAddress.then((promise) => navigator.clipboard.writeText(promise))
 
-   const copyAddress = await deployedContractAddress.then((promise) => (promise))
-    navigator.clipboard.writeText(copyAddress)
+  //  const copyAddress = await deployedContractAddress.then((promise) => (promise))
+  //   navigator.clipboard.writeText(copyAddress)
     toast.success("Address Copied to Clipboard")
   }
   catch(err) {
