@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "./Components/Navbar";
 import { landContractABI } from "../Constants/constants";
 import { useContract, useProvider, useSigner } from "wagmi";
+import { toast } from "react-toastify";
 
 const Transfer = () => {
   const [addressInput, setAddressInput] = useState("");
@@ -20,7 +21,7 @@ const Transfer = () => {
     try {
       const changeLandOwner = await contract.changeOwner(newAddress);
       await changeLandOwner.wait();
-      console.log(changeLandOwner, "Change");
+      toast.success("Owner Changed Successfully!")
     } catch (err) {
       console.error(err);
     }
