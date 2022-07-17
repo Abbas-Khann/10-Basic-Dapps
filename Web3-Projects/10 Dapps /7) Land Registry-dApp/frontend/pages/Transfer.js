@@ -1,26 +1,41 @@
 import React,{useState} from 'react'
 import Navbar from './Components/Navbar'
-import { deployerContractAddress, deployerContractABI } from '../Constants/constants'
+import { landContractABI } from '../Constants/constants'
 import { useContract, useProvider, useSigner } from 'wagmi'
 
 const Transfer = () => {
 
-  const [address, setAddress] = useState('');
+  const [addressInput, setAddressInput] = useState('');
   const [newOwnerAddress, setNewOwnerAddress] = useState('');
+  const [currOwner, setCurrOwner] = useState('')
 
   const provider = useProvider();
   const {data: signer} = useSigner();
   const contract = useContract({
-    addressOrName:  address,
-    contractInterface: deployerContractABI,
+    addressOrName:  addressInput,
+    contractInterface: landContractABI,
     signerOrProvider: signer || provider
   })
 
-  const changeOwner = async (val) => {
+  const changeOwner = async (newAddress) => {
     try{
-        const changeLandOwner = await contract.changeOwner(val.newOwnerAddress);
+        const changeLandOwner = await contract.changeOwner(newAddress);
         await changeLandOwner.wait()
         console.log(changeLandOwner, "Change")
+      
+    }
+    catch(err){
+      console.error(err)
+    }
+  }
+
+  const getOwner = async () => {
+    try{
+      const owner = await contract.getOwner();
+      await owner;
+      setCurrOwner(owner)
+      console.log("function called")
+      console.log("currOwner", currOwner)
     }
     catch(err){
       console.error(err)
@@ -28,11 +43,20 @@ const Transfer = () => {
   }
 
 
-  const handleAddresses = e => {
-    setAddress(e.target.value);
-    setNewOwnerAddress(e.target.value);
-    console.log(address, newOwnerAddress)
+
+  const handleFirstAddress = e => {
+    setAddressInput(e.target.value);
   }
+
+  const handleSecondInput = e => {
+    setNewOwnerAddress(e.target.value);
+  }
+
+  React.useEffect(() => {
+    getOwner()
+    getOwner()
+    getOwner()
+  }, []);
 
 
   return (
@@ -47,13 +71,14 @@ const Transfer = () => {
         </div>
         <div className='flex flex-col w-9/12 items-center'>
 
-        <input onChange={handleAddresses} className='rounded w-8/12 m-2 py-2 text-black'/>
-        <input onChange={handleAddresses} className='rounded w-8/12 m-2 py-2 text-black'/>
+        <input onChange={handleFirstAddress} className='rounded w-8/12 m-2 py-2 text-black'/>
+        <input onChange={handleSecondInput} className='rounded w-8/12 m-2 py-2 text-black'/>
         
         </div>
         </div>
         <div className='flex items-center justify-center'>
         <button onClick={() => changeOwner(newOwnerAddress)} className='bg-blue-400 text-2xl rounded px-4 py-2 mt-12'>Transfer</button>
+        <button onClick={getOwner}>owner</button>
         </div>
     </div>
   )

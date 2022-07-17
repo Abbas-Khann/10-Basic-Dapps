@@ -1,5 +1,5 @@
-export const deployerContractAddress = "0xADE2561c2a9FA8581da207E04A43657b3eaEB603";
-export const ownableContractAddress = "0x316aF102C8112Dc83F7a6A089430E72C86241A11";
+export const deployerContractAddress = "0x81B35b42d43623E9660CCE128d79e947B613e2fA";
+// export const ownableContractAddress = "0x316aF102C8112Dc83F7a6A089430E72C86241A11";
 
 export const deployerContractABI = [
     {
@@ -82,71 +82,71 @@ export const deployerContractABI = [
     }
   ]
 
-export const ownableContractABI = [
-    {
-      "inputs": [],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "_previousOwner",
-          "type": "address"
-        },
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "newOwner",
-          "type": "address"
-        }
-      ],
-      "name": "OwnerSet",
-      "type": "event"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "newOwner",
-          "type": "address"
-        }
-      ],
-      "name": "changeOwner",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "getOwner",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "getPreviousOwner",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    }
-  ]
+// export const ownableContractABI = [
+//     {
+//       "inputs": [],
+//       "stateMutability": "nonpayable",
+//       "type": "constructor"
+//     },
+//     {
+//       "anonymous": false,
+//       "inputs": [
+//         {
+//           "indexed": true,
+//           "internalType": "address",
+//           "name": "_previousOwner",
+//           "type": "address"
+//         },
+//         {
+//           "indexed": true,
+//           "internalType": "address",
+//           "name": "newOwner",
+//           "type": "address"
+//         }
+//       ],
+//       "name": "OwnerSet",
+//       "type": "event"
+//     },
+//     {
+//       "inputs": [
+//         {
+//           "internalType": "address",
+//           "name": "newOwner",
+//           "type": "address"
+//         }
+//       ],
+//       "name": "changeOwner",
+//       "outputs": [],
+//       "stateMutability": "nonpayable",
+//       "type": "function"
+//     },
+//     {
+//       "inputs": [],
+//       "name": "getOwner",
+//       "outputs": [
+//         {
+//           "internalType": "address",
+//           "name": "",
+//           "type": "address"
+//         }
+//       ],
+//       "stateMutability": "view",
+//       "type": "function"
+//     },
+//     {
+//       "inputs": [],
+//       "name": "getPreviousOwner",
+//       "outputs": [
+//         {
+//           "internalType": "address",
+//           "name": "",
+//           "type": "address"
+//         }
+//       ],
+//       "stateMutability": "view",
+//       "type": "function"
+//     }
+//   ]
 
   export const landContractABI = [
     {
@@ -303,4 +303,4 @@ export const ownableContractABI = [
       "stateMutability": "view",
       "type": "function"
     }
-  ]
+]
