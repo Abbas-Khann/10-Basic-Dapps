@@ -38,7 +38,6 @@ const Transfer = () => {
       console.error(err);
     }
   };
-
   const handleFirstAddress = (e) => {
     setAddressInput(e.target.value);
   };
