@@ -1,10 +1,10 @@
-import React,{useState} from "react"
+import React,{useState} from "react";
+import Navbar from "./Components/navbar";
 
 const Home = () => {
   return (
     <div>
-      <h1 className="text-4xl">This shit better work man!</h1>
-      <p className="bg-red-200">Noice</p>
+      <Navbar />
     </div>
   )
 }
