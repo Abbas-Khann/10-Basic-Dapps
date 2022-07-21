@@ -1,12 +1,12 @@
 import React from 'react'
-import AllJobs from './Components/AllJobs'
+import Job from './Components/Job'
 import Navbar from './Components/navbar'
 
 const AvailableJobs = () => {
   return (
     <div >
         <Navbar />
-        <AllJobs />
+        <Job />
     </div>
   )
 }
