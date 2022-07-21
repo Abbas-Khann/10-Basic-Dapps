@@ -3,9 +3,9 @@ import Navbar from './Components/navbar'
 
 const AvailableJobs = () => {
   return (
-    <div>
+    <div >
         <Navbar />
-        
+      
     </div>
   )
 }

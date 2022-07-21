@@ -12,7 +12,6 @@ contract JobBoard {
     uint256 public JOB_ID = 0;
     struct Job {
         string title;
-        string image;
         string companyName;
         string description;
         string employmentType;
@@ -27,7 +26,6 @@ contract JobBoard {
 
     function addJob(
         string memory _title,
-        string memory _image,
         string memory _companyName,
         string memory _description,
         string memory _employmentType,
@@ -40,7 +38,6 @@ contract JobBoard {
         jobsArray.push(
             Job(
              _title,
-             _image,
             _companyName, 
             _description, 
             _employmentType, 

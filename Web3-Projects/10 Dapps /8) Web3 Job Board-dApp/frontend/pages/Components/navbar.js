@@ -21,7 +21,9 @@ const Navbar = (props) => {
         <Link href='/'>
         <h1 className="text-xl cursor-pointer">Home</h1>
         </Link>
+        <Link href='/AvailableJobs'>
         <h1 className="text-xl cursor-pointer">Jobs </h1>
+        </Link>
         {
             darkMode ? <HiOutlineMoon className="text-2xl cursor-pointer" onClick={toggleDarkMode}/>
             : <FiSun className="text-2xl cursor-pointer" onClick={toggleDarkMode}/>
