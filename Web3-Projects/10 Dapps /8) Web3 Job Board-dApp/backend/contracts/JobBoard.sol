@@ -44,7 +44,8 @@ contract JobBoard {
             _location, 
             _salary, 
             _applyUrl, 
-            _contactEmail)
+            _contactEmail
+            )
         );
     }
 
