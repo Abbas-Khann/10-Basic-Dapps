@@ -4,9 +4,10 @@ import { FiSun } from 'react-icons/fi';
 import { HiOutlineMoon } from 'react-icons/hi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Link from "next/link";
+import { useGlobalContext } from "../../Context/Context";
 
-const Navbar = (props) => {
-    const {darkMode, toggleDarkMode} = props
+const Navbar = () => {
+    const {darkMode, toggleDarkMode} = useGlobalContext();
 
     return(
         <nav className="flex items-center justify-evenly p-4 bg-[#F2F4FB] dark:bg-[#1B2430] dark:text-white">
@@ -23,7 +24,7 @@ const Navbar = (props) => {
         <h1 className="text-xl cursor-pointer">Home</h1>
         </Link>
         <Link href='/AvailableJobs'>
-        <h1 className="text-xl cursor-pointer">Jobs </h1>
+        <h1 className="text-xl cursor-pointer">Jobs</h1>
         </Link>
         {
             darkMode ? <HiOutlineMoon className="text-2xl cursor-pointer" onClick={toggleDarkMode}/>

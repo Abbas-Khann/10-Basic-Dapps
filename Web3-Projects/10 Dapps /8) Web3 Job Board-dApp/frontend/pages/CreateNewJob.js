@@ -1,10 +1,15 @@
 import React from 'react'
+import { darkMode } from '../tailwind.config'
 import Navbar from './Components/navbar'
+import { useGlobalContext } from '../Context/Context'
 
 const CreateNewJob = () => {
+    const {darkMode} = useGlobalContext();
   return (
-    <main>
+    <main className={`${darkMode && 'dark'}`}>
         <Navbar />
+        <section className='dark:bg-[#10172a] dark:text-white'>
+
         <div className='flex justify-center items-center'>
             <h1 className='text-3xl text-center my-4'>Add a New Job</h1>
             <img src="https://img.icons8.com/external-flaticons-flat-flat-icons/64/000000/external-recruiter-recruitment-agency-flaticons-flat-flat-icons-4.png"/>
@@ -29,6 +34,7 @@ const CreateNewJob = () => {
                 <input className='border-solid border-2 border-zinc-200 py-1 text-lg rounded px-2 my-4 active:border-sky-300 focus:border-sky-300 outline-none' placeholder='Company Email...' />
 
         </div>
+        </section>
     </main>
   )
 }

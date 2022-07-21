@@ -1,13 +1,11 @@
 import Link from "next/link";
-import React,{useState} from "react";
+import React from "react";
 import Navbar from "./Components/navbar";
+import { useGlobalContext } from "../Context/Context";
 
 const Home = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const {darkMode, toggleDarkMode} = useGlobalContext();
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode)
-  }
   return (
     <div className={`${darkMode && 'dark'}`}>
       <Navbar 

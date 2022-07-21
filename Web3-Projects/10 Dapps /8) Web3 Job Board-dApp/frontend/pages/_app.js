@@ -1,3 +1,4 @@
+import { IndexProvider } from '../Context/Context';
 import '../styles/globals.css'
 import '@rainbow-me/rainbowkit/styles.css';
 import {
@@ -34,11 +35,13 @@ const wagmiClient = createClient({
 
 function MyApp({ Component, pageProps }) {
   return (
+        <IndexProvider>
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains} theme={darkTheme()}>
       <Component {...pageProps} />
       </RainbowKitProvider>
     </WagmiConfig>
+        </IndexProvider>
   );
 }
 

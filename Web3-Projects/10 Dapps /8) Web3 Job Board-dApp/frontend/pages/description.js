@@ -1,11 +1,13 @@
 import React from 'react'
 import Navbar from './Components/navbar'
+import { useGlobalContext } from '../Context/Context'
 
 const description = () => {
+    const {darkMode} = useGlobalContext();
   return (
-    <div>
+    <div className={`${darkMode && 'dark'}`}>
         <Navbar />
-        <div className='p-8'>
+        <section className='p-8 dark:bg-[#10172a] dark:text-white'>
 
         <div className='flex flex-col items-center h-48'>
         <p className='text-2xl'>LearnWeb3 is hiring a</p>
@@ -35,7 +37,7 @@ const description = () => {
         <p className='text-blue-400 text-lg'>Learnweb3.io</p>
         </div>
 
-        </div>
+        </section>
 
     </div>
   )
