@@ -3,6 +3,7 @@ import Head from "next/head";
 import { FiSun } from 'react-icons/fi';
 import { HiOutlineMoon } from 'react-icons/hi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import Link from "next/link";
 
 const Navbar = (props) => {
     const {darkMode, toggleDarkMode} = props
@@ -17,7 +18,9 @@ const Navbar = (props) => {
           url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap');
         </style>
         </Head>
+        <Link href='/'>
         <h1 className="text-xl cursor-pointer">Home</h1>
+        </Link>
         <h1 className="text-xl cursor-pointer">Jobs </h1>
         {
             darkMode ? <HiOutlineMoon className="text-2xl cursor-pointer" onClick={toggleDarkMode}/>

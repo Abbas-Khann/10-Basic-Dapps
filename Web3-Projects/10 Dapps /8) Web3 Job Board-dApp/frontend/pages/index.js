@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React,{useState} from "react";
 import Navbar from "./Components/navbar";
 
@@ -17,10 +18,18 @@ const Home = () => {
         <p className="py-3 text-[#9CB4CC] ">This dApp helps applicants and Employers in finding talent and web3 related jobs</p>
 
         <div className="flex flex-col py-4">
-        <button className="bg-sky-300 rounded p-2">Create a New Job</button>
-        <button className="bg-grey-500 rounded">Available Jobs</button>
+          <Link href='/CreateNewJob'>
+        <button className="bg-sky-300 hover:bg-sky-500 rounded-full p-2 mb-2">Create a New Job</button>
+          </Link>
+          <Link href='/AvailableJobs'>
+        <button className="bg-[#c3e6f8] hover:bg-[#8fceed] rounded-full p-2">Available Jobs</button>
+          </Link>
         </div>
       </div>
+        {/* <img src="https://img.icons8.com/ios/400/000000/find-matching-job.png"/> */}
+        <div className="flex justify-center">
+          <img src="https://img.icons8.com/dusk/350/000000/find-matching-job.png"/>
+        </div>
       </section>
     </div>
   )

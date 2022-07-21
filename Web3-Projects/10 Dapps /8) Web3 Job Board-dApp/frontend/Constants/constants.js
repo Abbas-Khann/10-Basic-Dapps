@@ -1,4 +1,4 @@
-export const JOB_BOARD_CONTRACT_ADDRESS = "0x4Ce6F19d3486F5bE4720491eaA4b65681EF6133C";
+export const JOB_BOARD_CONTRACT_ADDRESS = "0xA5cfb86681aFb5AF0Db74329abFC456f2C73Fca6";
 
 export const JOB_BOARD_CONTRACT_ABI = [
     {
@@ -19,6 +19,11 @@ export const JOB_BOARD_CONTRACT_ABI = [
         {
           "internalType": "string",
           "name": "_title",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_image",
           "type": "string"
         },
         {
@@ -101,6 +106,11 @@ export const JOB_BOARD_CONTRACT_ABI = [
             },
             {
               "internalType": "string",
+              "name": "image",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
               "name": "companyName",
               "type": "string"
             },
@@ -160,6 +170,11 @@ export const JOB_BOARD_CONTRACT_ABI = [
         },
         {
           "internalType": "string",
+          "name": "image",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
           "name": "companyName",
           "type": "string"
         },
@@ -197,4 +212,4 @@ export const JOB_BOARD_CONTRACT_ABI = [
       "stateMutability": "view",
       "type": "function"
     }
-  ];
+  ]
