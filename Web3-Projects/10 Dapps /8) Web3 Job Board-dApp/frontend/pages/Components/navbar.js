@@ -1,12 +1,18 @@
-import React from "react";
+import React, {useState} from "react";
 import Head from "next/head";
 import { FiSun } from 'react-icons/fi';
 import { HiOutlineMoon } from 'react-icons/hi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import Link from "next/link";
 
-const Navbar = (props) => {
-    const {darkMode, toggleDarkMode} = props
+const Navbar = () => {
+    // const {darkMode, toggleDarkMode} = props
+    const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setDarkMode(prevMode => !prevMode)
+  }
+  
     return(
         <nav className="flex items-center justify-evenly p-4 bg-[#F2F4FB]">
         <Head>

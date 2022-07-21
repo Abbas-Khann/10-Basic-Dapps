@@ -3,14 +3,14 @@ import React,{useState} from "react";
 import Navbar from "./Components/navbar";
 
 const Home = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  // const [darkMode, setDarkMode] = useState(false);
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode)
-  }
+  // const toggleDarkMode = () => {
+  //   setDarkMode(!darkMode)
+  // }
   return (
     <div>
-      <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode}/>
+      <Navbar />
       <section className="py-24">
       <div className="flex flex-col p-8">
         <h1 className="text-2xl border-b-2 border-blue-400 w-52">Web3 Job Board</h1>
