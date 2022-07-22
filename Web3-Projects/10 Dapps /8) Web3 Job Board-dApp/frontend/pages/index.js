@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import React from "react";
 import Navbar from "./Components/navbar";
 import { useGlobalContext } from "../Context/Context";
@@ -27,8 +28,8 @@ const Home = () => {
           </Link>
         </div>
       </div>
-        <div className="flex justify-center md:w-4/12 md:h-3/5">
-          <img src="https://img.icons8.com/dusk/350/000000/find-matching-job.png"/>
+        <div className="flex flex-col items-center md:w-4/12 md:h-3/5">
+          <Image width={380} height={380} layout="fixed" alt='icon' src="https://img.icons8.com/dusk/350/000000/find-matching-job.png" />
         </div>
       </section>
     </div>

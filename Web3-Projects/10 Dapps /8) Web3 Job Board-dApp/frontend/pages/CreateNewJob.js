@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Image from 'next/image'
 import Navbar from './Components/navbar'
 import { useGlobalContext } from '../Context/Context'
 import { useSigner, useProvider, useContract } from 'wagmi'
@@ -74,7 +75,7 @@ const CreateNewJob = () => {
 
         <div className='flex justify-center items-center'>
             <h1 className='text-3xl text-center my-4'>Add a New Job</h1>
-            <img src="https://img.icons8.com/external-flaticons-flat-flat-icons/64/000000/external-recruiter-recruitment-agency-flaticons-flat-flat-icons-4.png"/>
+            <Image width={40} height={40} alt="icon" src="https://img.icons8.com/external-flaticons-flat-flat-icons/64/000000/external-recruiter-recruitment-agency-flaticons-flat-flat-icons-4.png"/>
         </div>
         
             <div className='bg-sky-0 flex flex-col p-12 sm:py-4 sm:px-44 lg:px-72'>
