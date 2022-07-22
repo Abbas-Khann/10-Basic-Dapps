@@ -1,15 +1,91 @@
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 import Navbar from './Components/navbar'
 import { useGlobalContext } from '../Context/Context'
+import { JOB_BOARD_CONTRACT_ADDRESS, JOB_BOARD_CONTRACT_ABI } from '../Constants/constants';
+import { useProvider, useSigner, useContract } from 'wagmi';
 
 const description = () => {
     const {darkMode} = useGlobalContext();
+    const [descriptionData , setDescriptiondata] = useState([]);
+
+  
+    const provider = useProvider();
+    const {data: signer} = useSigner();
+    const contract = useContract( {
+      addressOrName: JOB_BOARD_CONTRACT_ADDRESS,
+      contractInterface: JOB_BOARD_CONTRACT_ABI,
+      signerOrProvider: signer || provider
+    });
+  
+    const getAllJobs = async () => {
+      try{
+        const getJobsArr = contract.getJobs();
+        await getJobsArr;
+      
+        const resolvedArray = await getJobsArr.then((promise) => promise);
+        console.log("resolved Array ka variable", resolvedArray)
+     
+       let desArr = [];
+        resolvedArray.forEach(itm =>{
+          desArr.push({
+            title : itm.title,
+            companyName : itm.companyName,
+            description : itm.description,
+            employmentType : itm.employmentType,
+            location : itm.location,
+            salary: itm.salary,
+            applyUrl : itm.applyUrl,
+            contactEmail : itm.contactEmail
+          })
+        })
+        setDescriptiondata(desArr)
+      }
+      catch(err){
+        console.error(err)
+      }
+    }
+
+    useEffect(() => {
+      getAllJobs();
+    }, [])
+
+    function handleIndex(val){
+      console.log(val)
+    }
+
+    
   return (
     <div className={`${darkMode && 'dark'}`}>
         <Navbar />
         <section className='p-8 dark:bg-[#10172a] dark:text-white sm:p-20 lg:p-24'>
-
+        {descriptionData[0] && descriptionData.map((item , ind ) => {
+          return (
+            <div onClick={()=>handleIndex(ind)}>
         <div className='flex flex-col items-center h-48'>
+        <p className='text-2xl'>{item.companyName} is hiring a</p>
+        <p className='text-2xl font-bold md:text-3xl'>{item.title}</p>
+        <p className='text-base mt-8 md:text-lg'>Compensation {item.salary.toString()}</p>
+        <p className='mt-4 md:text-xl'>{item.location}</p>
+        </div>
+
+        <p className='md:px-8 lg:px-12'>
+          {item.description}
+        </p>
+
+        <div className='mt-4 md:px-8 lg:px-12'>
+
+        <p className='text-lg'>Contact us at</p>
+        <p className='text-lg'>{item.contactEmail}</p>
+        <p className='text-lg'>Official Website</p>
+        <p className='text-blue-400 text-lg'>{item.applyUrl}</p>
+        </div>
+            
+            
+            </div>
+          )
+        })}
+
+        {/* <div className='flex flex-col items-center h-48'>
         <p className='text-2xl'>LearnWeb3 is hiring a</p>
         <p className='text-2xl font-bold md:text-3xl'> Full Stack Developer</p>
         <p className='text-base mt-8 md:text-lg'>Compensation $120k-$180k</p>
@@ -35,7 +111,7 @@ const description = () => {
         <p className='text-lg'>abbaskhan61999@gmail.com</p>
         <p className='text-lg'>Official Website</p>
         <p className='text-blue-400 text-lg'>Learnweb3.io</p>
-        </div>
+        </div> */}
 
         </section>
 
