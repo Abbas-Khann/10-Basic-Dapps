@@ -27,7 +27,6 @@ const Home = () => {
           </Link>
         </div>
       </div>
-        {/* <img src="https://img.icons8.com/ios/400/000000/find-matching-job.png"/> */}
         <div className="flex justify-center">
           <img src="https://img.icons8.com/dusk/350/000000/find-matching-job.png"/>
         </div>
