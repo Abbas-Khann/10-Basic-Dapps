@@ -5,10 +5,10 @@ import { JOB_BOARD_CONTRACT_ADDRESS, JOB_BOARD_CONTRACT_ABI } from '../Constants
 import { useProvider, useSigner, useContract } from 'wagmi';
 
 const description = () => {
-    const {darkMode} = useGlobalContext();
-    const [descriptionData , setDescriptiondata] = useState([]);
+    const {darkMode , indexData} = useGlobalContext();
+    const [descriptionData , setDescriptionData] = useState([]);
 
-  
+    console.log("Description dATA STATE:", descriptionData)
     const provider = useProvider();
     const {data: signer} = useSigner();
     const contract = useContract( {
@@ -38,7 +38,7 @@ const description = () => {
             contactEmail : itm.contactEmail
           })
         })
-        setDescriptiondata(desArr)
+        setDescriptionData(desArr)
       }
       catch(err){
         console.error(err)
@@ -49,41 +49,37 @@ const description = () => {
       getAllJobs();
     }, [])
 
-    function handleIndex(val){
-      console.log(val)
-    }
-
+   
+    console.log("idx", descriptionData[indexData])
 
   return (
     <div className={`${darkMode && 'dark'}`}>
         <Navbar />
-        <section className='p-8 dark:bg-[#10172a] dark:text-white sm:p-20 lg:p-24'>
-        {descriptionData[0] && descriptionData.map((item , ind ) => {
-          return (
-            <div onClick={()=>handleIndex(ind)}>
+       { descriptionData[indexData] && <section className='p-8 dark:bg-[#10172a] dark:text-white sm:p-20 lg:p-24 h-screen'>
+        
+            <div>
         <div className='flex flex-col items-center h-48'>
-        <p className='text-2xl'>{item.companyName} is hiring a</p>
-        <p className='text-2xl font-bold md:text-3xl'>{item.title}</p>
-        <p className='text-base mt-8 md:text-lg'>Compensation {item.salary.toString()}</p>
-        <p className='mt-4 md:text-xl'>{item.location}</p>
+        <p className='text-2xl'>{descriptionData[indexData].companyName} is hiring a</p>
+        <p className='text-2xl font-bold md:text-3xl'>{descriptionData[indexData].title}</p>
+        <p className='text-base mt-8 md:text-lg'>Compensation {descriptionData[indexData].salary.toString()}k</p>
+        <p className='mt-4 md:text-xl'>{descriptionData[indexData].location}</p>
         </div>
 
         <p className='md:px-8 lg:px-12'>
-          {item.description}
+          {descriptionData[indexData].description}
         </p>
 
         <div className='mt-4 md:px-8 lg:px-12'>
 
         <p className='text-lg'>Contact us at</p>
-        <p className='text-lg'>{item.contactEmail}</p>
+        <p className='text-lg'>{descriptionData[indexData].contactEmail}</p>
         <p className='text-lg'>Official Website</p>
-        <p className='text-blue-400 text-lg'>{item.applyUrl}</p>
+        <p className='text-blue-400 text-lg'>{descriptionData[indexData].applyUrl}</p>
         </div>
             
             
             </div>
-          )
-        })}
+         
 
         {/* <div className='flex flex-col items-center h-48'>
         <p className='text-2xl'>LearnWeb3 is hiring a</p>
@@ -114,7 +110,7 @@ const description = () => {
         </div> */}
 
         </section>
-
+}
     </div>
   )
 }
