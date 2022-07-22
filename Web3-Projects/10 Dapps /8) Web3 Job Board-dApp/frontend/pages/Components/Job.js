@@ -1,9 +1,20 @@
-import Link from 'next/link'
-import React from 'react'
-import { useGlobalContext } from '../../Context/Context'
+import Link from 'next/link';
+import React from 'react';
+import { useGlobalContext } from '../../Context/Context';
+import { useSigner, useContract, useProvider } from 'wagmi';
+import { JOB_BOARD_CONTRACT_ADDRESS, JOB_BOARD_CONTRACT_ABI } from '../../Constants/constants';
 
 const AllJobs = () => {
   const {darkMode} = useGlobalContext();
+
+  const provider = useProvider();
+  const {data: signer} = useSigner();
+  const contract = useContract( {
+    addressOrName: JOB_BOARD_CONTRACT_ADDRESS,
+    contractInterface: JOB_BOARD_CONTRACT_ABI,
+    signerOrProvider: signer || provider
+  });
+
   return (
     <div className={`${darkMode && 'dark'}`}> 
     <div className='flex flex-col justify-center p-6 bg-[#ebeef9] rounded dark:bg-[#222b44] dark:text-white my-4 '>

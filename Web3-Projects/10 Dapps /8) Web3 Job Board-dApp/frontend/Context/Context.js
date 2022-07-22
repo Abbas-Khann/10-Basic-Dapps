@@ -4,52 +4,15 @@ import { JOB_BOARD_CONTRACT_ADDRESS, JOB_BOARD_CONTRACT_ABI } from "../Constants
 
 export const IndexContext = createContext();
 
-const IndexProvider= ( {children} ) => {
-
-    // Fetching the provider and signer from Wagmi
-    const provider = useProvider();
-    const {data: signer} = useSigner();
-    const contract = useContract({
-        addressOrName: JOB_BOARD_CONTRACT_ADDRESS,
-        contractInterface: JOB_BOARD_CONTRACT_ABI,
-        signerOrProvider: signer || provider
-    });
-
-    // States here
-    const [darkMode, setDarkMode] = useState(false);
-    const [jobData, setJobData] = useState({
-        title: "",
-        CompanyName: "",
-        JobDescription: "",
-        EmploymentType: "",
-        JobLocation: "",
-        SalaryRange: 0,
-        OrganisationUrl: "",
-        ContactEmail: ""
-    });
-
-
-
-
-
-
-
-
+const IndexProvider = ( {children} ) => {
     
-    const handleInputData = event => {
-        setJobData((prev) => {
-            return {
-                ...prev,
-                [event.target.name]: event.target.value,
-            };
-        });
-    }
-    console.log(jobData) 
+    // States here
+    const [darkMode, setDarkMode] = useState(true);
     const toggleDarkMode = () => {
         setDarkMode(!darkMode)
     }
     return(
-        <IndexContext.Provider value={ {toggleDarkMode, darkMode, handleInputData} }>
+        <IndexContext.Provider value={ {toggleDarkMode, darkMode,} }>
         {children}
         </IndexContext.Provider>
 )

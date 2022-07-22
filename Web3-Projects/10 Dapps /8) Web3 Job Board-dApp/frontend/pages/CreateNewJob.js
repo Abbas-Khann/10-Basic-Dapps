@@ -1,9 +1,72 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Navbar from './Components/navbar'
 import { useGlobalContext } from '../Context/Context'
+import { useSigner, useProvider, useContract } from 'wagmi'
+import { JOB_BOARD_CONTRACT_ADDRESS, JOB_BOARD_CONTRACT_ABI } from '../Constants/constants'
 
 const CreateNewJob = () => {
-    const {darkMode, handleInputData} = useGlobalContext();
+    const {darkMode} = useGlobalContext();
+    const [jobData, setJobData] = useState({
+        title: "",
+        CompanyName: "",
+        JobDescription: "",
+        EmploymentType: "",
+        JobLocation: "",
+        SalaryRange: 0,
+        OrganisationUrl: "",
+        ContactEmail: ""
+    });
+
+    const handleInputData = (event) => {
+        setJobData((prev) => {
+            return {
+                ...prev,
+                [event.target.name]: event.target.value,
+            };
+        });
+    }
+    console.log(jobData)
+
+
+    const provider = useProvider();
+    const {data: signer} = useSigner();
+    const contract = useContract({
+        addressOrName: JOB_BOARD_CONTRACT_ADDRESS,
+        contractInterface: JOB_BOARD_CONTRACT_ABI,
+        signerOrProvider: signer || provider
+    });
+
+
+    const addNewJob = async (val) => {
+      try{
+        if(val.title &&
+          val.CompanyName &&
+          val.JobDescription &&
+          val.EmploymentType &&
+          val.JobLocation &&
+          val.SalaryRange &&
+          val.OrganisationUrl &&
+          val.ContactEmail
+          ){
+            const addJobs = await contract.addJob(
+              val.title,
+              val.CompanyName,
+              val.JobDescription,
+              val.EmploymentType,
+              val.JobLocation,
+              +(val.SalaryRange),
+              val.OrganisationUrl,
+              val.ContactEmail)
+           await addJobs.wait()
+           console.log("Ending")
+         
+          }
+      }
+      catch(err){
+        console.error(err)
+      }
+    }
+
   return (
     <main className={`${darkMode && 'dark'}`}>
         <Navbar />
@@ -69,6 +132,10 @@ const CreateNewJob = () => {
                  className='border-solid border-2 border-zinc-200 py-1 text-lg rounded px-2 my-4 active:border-sky-300 focus:border-sky-300 outline-none dark:text-black bg-[#F1F6F9]' 
                  placeholder='Company Email...' 
                  />
+                 <button
+                 onClick={() => addNewJob(jobData)} 
+                 className='hover:bg-sky-100 text-black rounded w-4/12 p-2 mx-auto md:2/12 bg-blue-200'>
+                 Submit</button>
 
         </div>
         </section>
