@@ -7,11 +7,6 @@ import { JOB_BOARD_CONTRACT_ADDRESS, JOB_BOARD_CONTRACT_ABI } from '../../Consta
 const AllJobs = () => {
   const {darkMode} = useGlobalContext();
   const [job, setJob] = useState([]);
-  const [role, setRole] = useState('');
-  const [organization, setOrganization] = useState('');
-  const [roleType, setRoleType] = useState('');
-  const [roleLocation, setRoleLocation] = useState('');
-  const [estimatedSalary, setEstimatedSalary] = useState(0)
 
   const provider = useProvider();
   const {data: signer} = useSigner();
