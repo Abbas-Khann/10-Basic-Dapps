@@ -6,12 +6,12 @@ const AllJobs = () => {
   const {darkMode} = useGlobalContext();
   return (
     <div className={`${darkMode && 'dark'}`}> 
-    <div className='flex flex-col justify-center p-6 bg-[#f4f0f0] dark:bg-[#222b44] dark:text-white my-4'>
+    <div className='flex flex-col justify-center p-6 bg-[#ebeef9] rounded dark:bg-[#222b44] dark:text-white my-4 '>
         <h1 className='text-2xl'>Junior Full Stack Developer</h1>
           <span className='text-[#83bdf6] text-xl'>at LearnWeb3</span>
-          <div className='text-base flex justify-between'>
+          <div className='text-base flex justify-between lg:flex lg:justify-start'>
         <span className='bg-gray-300 rounded p-1 dark:text-black'>Full Time</span>
-        <span className='bg-gray-300 rounded p-1 dark:text-black'>Remote</span>
+        <span className='bg-gray-300 rounded p-1 dark:text-black lg:mx-8'>Remote</span>
         <span className='bg-gray-300 rounded p-1 dark:text-black'>120k-180k</span>
           </div>
           <Link href='/description'>
