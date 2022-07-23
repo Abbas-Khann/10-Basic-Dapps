@@ -8,7 +8,6 @@ const description = () => {
     const {darkMode , indexData} = useGlobalContext();
     const [descriptionData , setDescriptionData] = useState([]);
 
-    console.log("Description dATA STATE:", descriptionData)
     const provider = useProvider();
     const {data: signer} = useSigner();
     const contract = useContract( {
