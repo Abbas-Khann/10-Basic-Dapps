@@ -55,7 +55,7 @@ const description = () => {
   return (
     <div className={`${darkMode && 'dark'}`}>
         <Navbar />
-       { descriptionData[indexData] && <section className='p-8 dark:bg-[#10172a] dark:text-white sm:p-20 lg:p-24 h-screen'>
+       { descriptionData[indexData] && <section className='p-8 dark:bg-[#10172a] dark:text-white sm:p-20 lg:p-24 '>
         
             <div>
         <div className='flex flex-col items-center h-48'>

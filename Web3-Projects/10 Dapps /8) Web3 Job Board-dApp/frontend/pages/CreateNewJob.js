@@ -70,10 +70,6 @@ const CreateNewJob = () => {
       }
     }
 
-    React.useEffect(() => {
-      toast.error("Shit is actually working")
-    }, [])
-
   return (
     <main className={`${darkMode && 'dark'}`}>
         <Navbar />
