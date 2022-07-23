@@ -1,3 +1,4 @@
+import { ToastContainer } from 'react-toastify';
 import { IndexProvider } from '../Context/Context';
 import '../styles/globals.css'
 import '@rainbow-me/rainbowkit/styles.css';
@@ -39,6 +40,18 @@ function MyApp({ Component, pageProps }) {
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains} theme={darkTheme()}>
       <Component {...pageProps} />
+      <ToastContainer
+      theme='dark'
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      />
       </RainbowKitProvider>
     </WagmiConfig>
         </IndexProvider>

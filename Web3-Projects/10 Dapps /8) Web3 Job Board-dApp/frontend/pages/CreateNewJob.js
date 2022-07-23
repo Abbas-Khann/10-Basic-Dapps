@@ -4,6 +4,8 @@ import Navbar from './Components/navbar'
 import { useGlobalContext } from '../Context/Context'
 import { useSigner, useProvider, useContract } from 'wagmi'
 import { JOB_BOARD_CONTRACT_ADDRESS, JOB_BOARD_CONTRACT_ABI } from '../Constants/constants'
+import { toast } from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css";
 
 const CreateNewJob = () => {
     const {darkMode} = useGlobalContext();
@@ -59,7 +61,7 @@ const CreateNewJob = () => {
               val.OrganisationUrl,
               val.ContactEmail)
            await addJobs.wait()
-           console.log("Ending")
+           toast.success('New Job Created!!!')
          
           }
       }
@@ -67,6 +69,10 @@ const CreateNewJob = () => {
         console.error(err)
       }
     }
+
+    React.useEffect(() => {
+      toast.error("Shit is actually working")
+    }, [])
 
   return (
     <main className={`${darkMode && 'dark'}`}>
