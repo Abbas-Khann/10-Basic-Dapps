@@ -22,7 +22,6 @@ const description = () => {
         await getJobsArr;
       
         const resolvedArray = await getJobsArr.then((promise) => promise);
-        console.log("resolved Array ka variable", resolvedArray)
      
        let desArr = [];
         resolvedArray.forEach(item =>{
