@@ -4,9 +4,8 @@
 -> A job should consist of many properties and should be stored inside of a struct
 -> We should be able to add new Jobs to the Job Board
 -> We should be able to see all the available jobs 
--> We should be able to see the amount of jobs posted
 */
-pragma solidity ^ 0.8.0;
+pragma solidity ^0.8.0;
 
 contract JobBoard {
     uint256 public JOB_ID = 0;
@@ -61,6 +60,4 @@ contract JobBoard {
         jobsArray[_index] = jobsArray[jobsArray.length - 1];
         jobsArray.pop();
     }
-
-
 }
