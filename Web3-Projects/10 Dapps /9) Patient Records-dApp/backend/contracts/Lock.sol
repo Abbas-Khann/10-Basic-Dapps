@@ -1,34 +1,78 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
+
+/*
+-> struct consisting of pateint's info that includes
+-> id, name, age, gender, string array of documents so that we push it to ipfs
+-> an array where we can upload our files to ipfs with the file name
+*/
 pragma solidity ^0.8.9;
 
-// Import this file to use console.log
-import "hardhat/console.sol";
+contract Healthcare {
 
-contract Lock {
-    uint public unlockTime;
-    address payable public owner;
+    address public admin;
+    uint public patient_ID = 0;
 
-    event Withdrawal(uint amount, uint when);
+    struct Patient {
+        string name;
+        uint age;
+        string sex;
+        string location;
+        string[] docs;
+        string[] docsD;
+    }
 
-    constructor(uint _unlockTime) payable {
-        require(
-            block.timestamp < _unlockTime,
-            "Unlock time should be in the future"
+    mapping(address => Patient) public patients;
+    address[] patientList;
+    string[] patientNameList;
+    
+    constructor () {
+        admin = msg.sender;
+    }
+
+    function addPatient(
+        string memory _name,
+        uint _age,
+        string memory _sex,
+        string memory _location
+    )
+    public
+    {
+        patients[msg.sender].name = _name;
+        patients[msg.sender].age = _age;
+        patients[msg.sender].sex = _sex;
+        patients[msg.sender].location = _location;
+        patientList.push(msg.sender);
+        patientNameList.push(_name);
+        patient_ID++;
+    }
+
+    function getPatientsInfo() public view returns(string[] memory, address[] memory) {
+        return (patientNameList, patientList);
+    }
+
+    function getPatientDetails(address _addr) public view returns(
+        string memory,
+        uint,
+        string memory,
+        string memory,
+        string[] memory,
+        string[] memory
+    )
+    {
+        return(patients[_addr].name,
+        patients[_addr].age,
+        patients[_addr].sex,
+        patients[_addr].location,
+        patients[_addr].docs,
+        patients[_addr].docsD
         );
-
-        unlockTime = _unlockTime;
-        owner = payable(msg.sender);
     }
 
-    function withdraw() public {
-        // Uncomment this line to print a log in your terminal
-        // console.log("Unlock time is %o and block timestamp is %o", unlockTime, block.timestamp);
 
-        require(block.timestamp >= unlockTime, "You can't withdraw yet");
-        require(msg.sender == owner, "You aren't the owner");
-
-        emit Withdrawal(address(this).balance, block.timestamp);
-
-        owner.transfer(address(this).balance);
+    function uploadDocumuments(address patient_addr, string memory _name, string memory _hash) public {
+        patients[patient_addr].docs.push(_name);
+        patients[patient_addr].docsD.push(_hash);
     }
+
+    
 }
