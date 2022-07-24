@@ -8,7 +8,7 @@ const main = async () => {
 
   await deployedHealthcareContract.deployed();
 
-  console.log(deployedHealthcareContract.address);
+  console.log("Contract Address",deployedHealthcareContract.address);
 
 }
 
