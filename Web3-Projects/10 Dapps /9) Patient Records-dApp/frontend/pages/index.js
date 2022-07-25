@@ -13,11 +13,20 @@ const Home = () => {
         </style>
       </Head>
       <section className="h-screen bg-cover bg-[url('/img/doctorr.jpeg')] lg:bg-[url('/img/doctor.jpeg')]">
-      <h1>Patient Records</h1>
-      <p>All of your medical records in one system, Safe and Secure!</p>
-      <button className='bg-blue-400 rounded px-4 py-3'>Connect Wallet</button>
-      <button className='bg-red-500 rounded px-4 py-3 ml-2'>Register</button>
+        <div className='absolute inset-0 bg-gray-900 bg-opacity-60'>
 
+        <div className='flex flex-col items-center py-80'>
+
+      <h1 className='text-white text-4xl'>Patient Records</h1>
+      <p className='text-center text-white p-2 text-lg lg:text-2xl'>All of your medical records in one system, Safe and Secure!</p>
+      <div className=''>
+
+      <button className='bg-blue-400 rounded px-4 py-3 text-white'>Connect Wallet</button>
+      <button className='bg-red-500 rounded px-5 py-3 ml-2 text-white'>Register</button>
+      </div>
+        </div>
+
+        </div>
       </section>
     </main>
   )
