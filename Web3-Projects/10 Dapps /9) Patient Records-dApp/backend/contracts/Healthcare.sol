@@ -1,78 +1,96 @@
-// SPDX-License-Identifier: MIT
-
-/*
--> struct consisting of pateint's info that includes
--> id, name, age, gender, string array of documents so that we push it to ipfs
--> an array where we can upload our files to ipfs with the file name
-*/
-pragma solidity ^0.8.9;
+// SPDX-License-Identifier: Unlicense
+pragma solidity ^0.8.0;
 
 contract Healthcare {
 
     address public admin;
-    uint public patient_ID = 0;
-
+    uint internal patient_ID = 0;
+   
     struct Patient {
+        uint id;
+        address addr;
         string name;
         uint age;
         string sex;
         string location;
-        string[] docs;
-        string[] docsD;
+        PatientDocument[] docs;
     }
-
-    mapping(address => Patient) public patients;
-    address[] patientList;
-    string[] patientNameList;
     
+    struct PatientDocument{
+        string docName;
+        string hash;
+    }
+    
+    mapping(address => Patient) internal patientToAdd;
+    mapping(address => uint) internal patientMap;
+    mapping(address => bool) internal hasRegistered;
+
+    Patient[] internal patientArray;
+
     constructor () {
         admin = msg.sender;
     }
 
     function addPatient(
-        string memory _name,
-        uint _age,
-        string memory _sex,
-        string memory _location
-    )
-    public
+     string memory _name,
+     uint _age,
+     string memory _sex,
+     string memory _location
+    ) 
+    external
     {
-        patients[msg.sender].name = _name;
-        patients[msg.sender].age = _age;
-        patients[msg.sender].sex = _sex;
-        patients[msg.sender].location = _location;
-        patientList.push(msg.sender);
-        patientNameList.push(_name);
-        patient_ID++;
+    require(
+    hasRegistered[msg.sender] == false,
+    "You are already Registered!");
+     patientToAdd[msg.sender].addr = msg.sender;
+     patientToAdd[msg.sender].name = _name;
+     patientToAdd[msg.sender].age = _age;
+     patientToAdd[msg.sender].sex = _sex;
+     patientToAdd[msg.sender].location = _location;
+     patientArray.push(patientToAdd[msg.sender]);
+     patientMap[msg.sender] = patient_ID;
+     hasRegistered[msg.sender] = true;
+     patient_ID++;
+    }
+    
+   function updatePatient(
+    string memory _name,
+    uint _age,
+    string memory _sex, 
+    string memory _location
+    ) external {
+    patientArray[patientMap[msg.sender]].name = _name;
+    patientArray[patientMap[msg.sender]].age = _age;
+    patientArray[patientMap[msg.sender]].sex = _sex;
+    patientArray[patientMap[msg.sender]].location = _location;
+   }
+
+    function addToDocsArr(
+        string memory _docName,
+        string memory _docHash
+        ) external {
+        require(hasRegistered[msg.sender] == true,"Register First Or Cant Add other's File");
+        patientArray[patientMap[msg.sender]].docs.push(PatientDocument(_docName , _docHash));
+    }   
+
+    function deleteDocs(uint _index) external {
+        require(msg.sender == patientArray[patientMap[msg.sender]].addr , "You can't delete another patient's file");
+        patientArray[patientMap[msg.sender]].docs[_index] = patientArray[patientMap[msg.sender]].docs[patientArray[patientMap[msg.sender]].docs.length -1];
+        patientArray[patientMap[msg.sender]].docs.pop();
+    }    
+   
+    function getPatientsInfo() public view returns(Patient[] memory) {
+        return patientArray;
     }
 
-    function getPatientsInfo() public view returns(string[] memory, address[] memory) {
-        return (patientNameList, patientList);
+    function getDocsInfo() public view returns(PatientDocument[] memory) {
+        require(hasRegistered[msg.sender] == true, "You need register first!");
+        return patientArray[patientMap[msg.sender]].docs;
     }
 
-    function getPatientDetails(address _addr) public view returns(
-        string memory,
-        uint,
-        string memory,
-        string memory,
-        string[] memory,
-        string[] memory
-    )
-    {
-        return(patients[_addr].name,
-        patients[_addr].age,
-        patients[_addr].sex,
-        patients[_addr].location,
-        patients[_addr].docs,
-        patients[_addr].docsD
-        );
+    function getId() public view returns(uint) {
+        require(hasRegistered[msg.sender] == true, "You need to register first!");
+        return patientArray[patientMap[msg.sender]].id;
     }
-
-
-    function uploadDocumuments(address patient_addr, string memory _name, string memory _hash) public {
-        patients[patient_addr].docs.push(_name);
-        patients[patient_addr].docsD.push(_hash);
-    }
-
     
 }
