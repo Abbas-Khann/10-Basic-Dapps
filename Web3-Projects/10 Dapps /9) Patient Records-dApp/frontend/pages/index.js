@@ -22,7 +22,7 @@ const Home = () => {
       <div className=''>
 
       <button className='bg-blue-400 rounded px-4 py-3 text-white'>Connect Wallet</button>
-      <button className='bg-red-500 rounded px-5 py-3 ml-2 text-white'>Register</button>
+      <button className='bg-red-500 rounded px-5 py-3 ml-2 text-white'>Register</button> 
       </div>
         </div>
 
