@@ -14,7 +14,7 @@ const Patient = () => {
           url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap');
         </style>
         <div className='absolute inset-0 bg-gray-900 bg-opacity-80'>
-            <h1 className='text-center text-white text-3xl mt-4'>Abbas Khan</h1>
+            <h1 className='text-center text-white text-3xl mt-4'>Your Admin</h1>
             <div className='sm:flex justify-evenly sm:py-20'>
             <Table />
             <Records />
