@@ -16,7 +16,7 @@ const Table = () => {
                     <td class='py-3 px-6'>Location</td>
                     <td class='py-3 px-6'>Address</td>
                 </tr>
-                <tr class='bg-cyan-200 flex flex-col'>
+                <tr class='bg-cyan-200 flex flex-col '>
                     <td class="py-3 px-6">Abbas Khan</td>
                     <td class="py-3 px-6">22</td>
                     <td class="py-3 px-6">Male</td>
