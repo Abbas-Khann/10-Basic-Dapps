@@ -3,11 +3,7 @@ import Records from './Components/Records'
 import Table from './Components/Table'
 
 const Patient = () => {
-
-  
-
   return (
-    
     <section className="h-screen bg-cover bg-[url('/img/doctorr.jpeg')] lg:bg-[url('/img/doctor.jpeg')]">
         <style>
           @import
