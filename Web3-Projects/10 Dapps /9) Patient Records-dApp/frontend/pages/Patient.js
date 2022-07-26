@@ -16,7 +16,9 @@ const Patient = () => {
             <Table />
             <Records />
             </div>
+            <div className='flex justify-center items-center'>
             <Reports />
+            </div>
         </div>
     </section>
   )
