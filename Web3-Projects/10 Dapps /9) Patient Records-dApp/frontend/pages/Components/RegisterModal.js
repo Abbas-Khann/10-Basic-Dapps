@@ -33,7 +33,7 @@ const Register = () => {
 				onClick={handleShow}
 				variant='light'
 				size='lg'
-				className='sign-in-button'
+				className='sign-in-button py-1 mr-2 rounded-4xl'
 			>
 				Register
 			</Button>

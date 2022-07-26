@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import RegisterModal from './Components/RegisterModal';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ConnectButton } from '@rainbow-me/rainbowkit'
 const Home = () => {
   return (
     <main>
@@ -24,7 +25,8 @@ const Home = () => {
       <div className='flex items-center justify-center'>
       <RegisterModal />
 
-      <button className=' bg-blue-400 rounded px-4 py-2 text-white ml-5'>Connect Wallet</button>
+      {/* <button className=' bg-blue-400 rounded px-4 py-2 text-white ml-5'>Connect Wallet</button> */}
+      <ConnectButton />
       </div>
       </div>
 
