@@ -1,5 +1,6 @@
 import React from 'react'
 import Records from './Components/Records'
+import Reports from './Components/Reports'
 import Table from './Components/Table'
 
 const Patient = () => {
@@ -15,6 +16,7 @@ const Patient = () => {
             <Table />
             <Records />
             </div>
+            <Reports />
         </div>
     </section>
   )
