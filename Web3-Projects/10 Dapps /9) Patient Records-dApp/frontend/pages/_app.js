@@ -3,7 +3,7 @@ import '@rainbow-me/rainbowkit/styles.css';
 import {
   getDefaultWallets,
   RainbowKitProvider,
-} from '@rainbow-me/rainbowkit';
+} from '@rainbow-me/rainbowkit'; 
 import {
   chain,
   configureChains,
