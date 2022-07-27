@@ -1,14 +1,8 @@
 import React, {useState} from 'react'
+import Reports from './Reports'
 
-const Records = () => {
+const Records = ({onChange}) => {
 
-  const [fileName, setFileName] = useState('')
-
-  const onChange = event => {
-    setFileName(event.target.value)
-  }
-
-  console.log(fileName)
 
   return (
     <div className='flex flex-col justify-center text-white'>
@@ -19,6 +13,7 @@ const Records = () => {
         <button className="bg-cyan-500 hover:bg-cyan-400 rounded px-4 py-2 mt-2 text-white">Upload</button>
         </div>
     </div>
+    
        
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Reports = () => {
+const Reports = ({fileName}) => {
   return (
     <div>
         <table class='shadow-2xl border-2 border-cyan-200'>

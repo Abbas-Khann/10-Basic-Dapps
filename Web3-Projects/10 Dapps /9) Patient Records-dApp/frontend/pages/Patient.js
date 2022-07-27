@@ -1,9 +1,16 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Records from './Components/Records'
 import Reports from './Components/Reports'
 import Table from './Components/Table'
 
 const Patient = () => {
+  const [fileName, setFileName] = useState('')
+
+  const onChange = event => {
+    setFileName(event.target.value)
+  }
+
+  // console.log(fileName)
 
   return (
     <section className="h-screen bg-cover bg-[url('/img/doctorr.jpeg')] lg:bg-[url('/img/doctor.jpeg')]">
@@ -15,10 +22,10 @@ const Patient = () => {
             <h1 className='text-center text-white text-3xl mt-4'>Your Admin</h1>
             <div className='sm:flex justify-evenly sm:py-20'>
             <Table />
-            <Records />
+            <Records onChange={onChange}/>
             </div>
             <div className='flex justify-center items-center'>
-            <Reports />
+            <Reports fileName={fileName} />
             </div>
         </div>
     </section>
