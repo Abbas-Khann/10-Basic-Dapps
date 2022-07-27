@@ -1,8 +1,18 @@
 import React, { useState } from "react";
 import { Form, Modal, Button } from "react-bootstrap";
-
+import { useContract, useProvider, useSigner } from "wagmi";
+import { HEALTHCARE_CONTRACT_ADDRESS, HEALTHCARE_CONTRACT_ABI } from "../../Constants/constants";
 
 const Register = () => {
+	// Fetching signer and provider from wagmi
+	const provider = useProvider();
+	const {data: signer} = useSigner();
+	const contract = useContract({
+		addressOrName: HEALTHCARE_CONTRACT_ADDRESS,
+		contractInterface: HEALTHCARE_CONTRACT_ABI,
+		signerOrProvider: signer || provider
+	})
+
 	const [show, setShow] = useState(false);
 
 	const handleClose = () => setShow(false);
@@ -15,6 +25,8 @@ const Register = () => {
 		location: "",
 	});
 
+	console.log(details)
+
 	const handleChange = (event) => {
 		event.preventDefault();
 		const { name, value } = event.target;
@@ -26,6 +38,21 @@ const Register = () => {
 			};
 		});
 	};
+
+	const addNewPatient = async (val) => {
+		try{
+
+			if(val.name && val.age && val.sex && val.location) {
+				const addUser = await contract.addPatient(val.name, +val.age, val.sex, val.location)
+				await addUser.wait();
+				console.log("Function executed")
+			}
+		}
+		catch(err){
+			console.error(err)
+		}
+	}
+
 
 	return (
 		<div>
@@ -87,7 +114,7 @@ const Register = () => {
 								placeholder='Enter your location'
 							/>
 						</Form.Group>
-						<Button variant='outline-danger'>
+						<Button variant='outline-danger' onClick={() => addNewPatient(details)}>
 							Submit
 						</Button>
 					</Form>
