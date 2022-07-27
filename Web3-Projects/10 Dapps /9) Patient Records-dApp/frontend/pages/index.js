@@ -25,7 +25,6 @@ const Home = () => {
       <div className='flex items-center justify-center'>
       <RegisterModal />
 
-      {/* <button className=' bg-blue-400 rounded px-4 py-2 text-white ml-5'>Connect Wallet</button> */}
       <ConnectButton />
       </div>
       </div>
