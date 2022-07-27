@@ -1,5 +1,4 @@
-import React, {useState} from 'react'
-import Reports from './Reports'
+import React from 'react'
 
 const Records = ({onChange}) => {
 
@@ -10,7 +9,10 @@ const Records = ({onChange}) => {
         <input onChange={onChange} className='p-2 rounded text-black' placeholder='Enter your File Name'/>
         <input className='bg-white rounded mt-2 text-black' type="file"/>
         <div>
-        <button className="bg-cyan-500 hover:bg-cyan-400 rounded px-4 py-2 mt-2 text-white">Upload</button>
+        <button 
+        className="bg-cyan-500 hover:bg-cyan-400 rounded px-4 py-2 mt-2 text-white">
+        Upload
+        </button>
         </div>
     </div>
     
