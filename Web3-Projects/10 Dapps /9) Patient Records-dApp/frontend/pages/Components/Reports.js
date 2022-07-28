@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Reports = ({fileName}) => {
+const Reports = ({fileName, hash}) => {
   return (
     <div>
         <table class='shadow-2xl border-2 border-cyan-200'>
@@ -16,7 +16,7 @@ const Reports = ({fileName}) => {
                     
                 </tr>
                 <tr class='bg-white flex flex-col '>
-                    <td class="py-3 px-6 border-b-2 border-blue-200">ipfs.aldfnlaknbfkuawbefkawnbkjefbauwf</td>
+                    <td class="py-3 px-6 border-b-2 border-blue-200">{hash}</td>
                     <td class="py-3 px-6">ipfs.aldfnlaknbfkuawbefkawnbkjefbauwf</td>
                     
                 </tr>

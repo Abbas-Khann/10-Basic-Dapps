@@ -1,6 +1,30 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import *  as IPFS  from 'ipfs-core'
 
-const Records = ({onChange}) => {
+const Records = ({onChange, setHash}) => {
+  // First off i need to push hello world to ipfs for testing purposes
+  // Secondly i need to get the data aswell
+  // after that i need to set the input box up to the adding data to IPFS and test it by getting the data
+  // After i get the CID's i need to fetch the addToDocs function from the backend and push this value through the signer to the blockchain
+  // const [path, setPath] = useState('')
+
+  const addDataIPFS = async () => {
+    const node = await IPFS.create();
+    const data = 'What up dawg!'
+    const result = node.add(data);
+    const resolvedPromise = result.then((promise) => console.log("resolvedPromise:", setHash(promise.path)))
+    console.log(result)
+  }
+  // getDataIPFS("QmYjtnHhxgaqbSuQW9Xwj2g1EEWJYqaynhnFf6MXHd8SrT")
+
+  // console.table(path)
+
+
+  useEffect(() => {
+    addDataIPFS()
+    // getDataIPFS()
+    // testSaveNameToIpfs();
+  }, [])
 
 
   return (

@@ -5,6 +5,7 @@ import Table from './Components/Table'
 
 const Patient = () => {
   const [fileName, setFileName] = useState('')
+  const [hash, setHash] = useState('')
 
   const onChange = event => {
     setFileName(event.target.value)
@@ -22,10 +23,10 @@ const Patient = () => {
             <h1 className='text-center text-white text-3xl mt-4'>Your Admin</h1>
             <div className='sm:flex justify-evenly sm:py-20'>
             <Table />
-            <Records onChange={onChange}/>
+            <Records onChange={onChange} setHash={setHash}/>
             </div>
             <div className='flex justify-center items-center'>
-            <Reports fileName={fileName} />
+            <Reports fileName={fileName} hash={hash}/>
             </div>
         </div>
     </section>
