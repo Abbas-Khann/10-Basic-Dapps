@@ -6,12 +6,14 @@ import Table from './Components/Table'
 const Patient = () => {
   const [fileName, setFileName] = useState('')
   const [hash, setHash] = useState('')
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const onChange = event => {
     setFileName(event.target.value)
   }
 
-  // console.log(fileName)
+  console.log("selectedFile", selectedFile)
+  console.log("hash", hash)
 
   return (
     <section className="h-screen bg-cover bg-[url('/img/doctorr.jpeg')] lg:bg-[url('/img/doctor.jpeg')]">
@@ -23,10 +25,10 @@ const Patient = () => {
             <h1 className='text-center text-white text-3xl mt-4'>Your Admin</h1>
             <div className='sm:flex justify-evenly sm:py-20'>
             <Table />
-            <Records onChange={onChange} setHash={setHash} fileName={fileName}/>
+            <Records onChange={onChange} setHash={setHash} fileName={fileName} selectedFile={selectedFile} setSelectedFile={setSelectedFile}/>
             </div>
             <div className='flex justify-center items-center'>
-            <Reports fileName={fileName} hash={hash}/>
+            <Reports fileName={fileName} hash={hash} />
             </div>
         </div>
     </section>
