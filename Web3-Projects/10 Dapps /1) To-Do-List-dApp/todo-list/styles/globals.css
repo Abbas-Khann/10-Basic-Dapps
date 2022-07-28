@@ -3,7 +3,39 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  background: linear-gradient(to right, dodgerblue, whitesmoke);
+  
+  
+  /* background: linear-gradient(to right, dodgerblue, whitesmoke);
+  background: rgb(116,144,255);
+background: linear-gradient(329deg, rgba(116,144,255,1) 0%, rgba(110,186,242,1) 35%, rgba(55,186,210,1) 70%, rgba(116,144,255,1) 100%);
+background-image: linear-gradient(to bottom, #87b6ff, #49ceff, #00e2ff, #36f3e9, #83ffc9); */
+}
+
+.main__bg {
+  background-image: linear-gradient(-60deg, #646FD4 50%, #E8A0BF 50%);
+  animation: slide 3s ease-in-out infinite alternate;
+  position: fixed;
+  top:0;
+  bottom: 0;
+  left: -50%;
+  right: -50%;
+  opacity: 0.5;
+  z-index: -1;
+}
+.layer1 {
+  animation-direction: alternate-reverse;
+  animation-duration: 4s;
+}
+.layer2 {
+  animation-duration: 5s;
+}
+@keyframes slide {
+  0% {
+      transform: translateX(-25%);
+  }
+  100% {
+      transform: translateX(25%);
+  }
 }
 
 a {
