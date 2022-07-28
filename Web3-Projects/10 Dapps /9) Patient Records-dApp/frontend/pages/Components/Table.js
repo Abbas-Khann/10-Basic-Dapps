@@ -33,6 +33,7 @@ const Table = () => {
                 });
             });
             setTableData(newArray);
+            getAdmin();
         }   
         catch(err){
             console.error(err)
@@ -50,14 +51,13 @@ const Table = () => {
         }
     }
 
-    console.log("adminAddress", adminAddress)
-    console.log(tableData[0])
+    // console.log("adminAddress", adminAddress)
+    // console.log(tableData[0])
 
 
 
     React.useEffect(() => {
-        getPatientData()
-        getAdmin();
+        getPatientData();
     }, [])
 
   return (
