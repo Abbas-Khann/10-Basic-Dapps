@@ -16,7 +16,7 @@ const Reports = ({fileName, hash, }) => {
                     
                 </tr>
                 <tr class='bg-white flex flex-col '>
-                    <td class="py-3 px-6 border-b-2 border-blue-200">OAUWBEKABNKVBKUwbfekjeakfbakjbg</td>
+                    <td class="py-3 px-6 border-b-2 border-blue-200">ipfs.io/ipfs/{hash}</td>
                     <td class="py-3 px-6">ipfs.aldfnlaknbfkuawbefkawnbkjefbauwf</td>
                     
                 </tr>
