@@ -22,10 +22,6 @@ const Records = ({onChange, setHash, fileName, selectedFile, setSelectedFile}) =
       console.error(err)
     }
   }
-  // getDataIPFS("QmYjtnHhxgaqbSuQW9Xwj2g1EEWJYqaynhnFf6MXHd8SrT")
-
-  // console.table(path)
-
 
   // useEffect(() => {
   //   addDataIPFS()
