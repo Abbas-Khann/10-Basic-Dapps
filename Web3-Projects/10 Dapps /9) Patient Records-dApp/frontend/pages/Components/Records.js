@@ -54,14 +54,6 @@ const Records = ({onChange, setHash, fileName, selectedFile, setSelectedFile, ha
       console.error(err)
     }
   }
-  
-  // const handleSubmit = async() => {
-  //   await addDataIPFS();
-  //   setTimeout(() => {
-  //      addDocuments(fileName, hash);
-  //   }, 5000) 
-
-  // }
 
   console.log("documentsData State", documentsData)
 
