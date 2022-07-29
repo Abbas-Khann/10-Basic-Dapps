@@ -42,7 +42,7 @@ const BlogCard = (props) => {
         
         >
         <span
-        className="mb-4 bg-blue-500 text-white text-xl bold rounded inline px-2 mb-2"
+        className="bg-blue-500 text-white text-xl bold rounded inline px-2 mb-2"
         >
         {typeOf}
         </span>   
