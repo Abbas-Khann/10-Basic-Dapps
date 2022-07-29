@@ -23,6 +23,9 @@ const Records = ({onChange, setHash, fileName, selectedFile, setSelectedFile, ha
       const resolvedPromise = result.then((promise) => setHash(promise.path))
       console.log("resolvedPromise", resolvedPromise)
       console.log(result)
+      setTimeout(() => {
+        addDocuments(fileName, hash);
+     }, 5000) 
       return true;
     }
     catch(err){
@@ -52,13 +55,13 @@ const Records = ({onChange, setHash, fileName, selectedFile, setSelectedFile, ha
     }
   }
   
-  const handleSubmit = async() => {
-    await addDataIPFS();
-    setTimeout(() => {
-       addDocuments(fileName, hash);
-    }, 5000) 
+  // const handleSubmit = async() => {
+  //   await addDataIPFS();
+  //   setTimeout(() => {
+  //      addDocuments(fileName, hash);
+  //   }, 5000) 
 
-  }
+  // }
 
   console.log("documentsData State", documentsData)
 
@@ -78,7 +81,7 @@ const Records = ({onChange, setHash, fileName, selectedFile, setSelectedFile, ha
         />
         <div>
         <button
-        onClick={handleSubmit}
+        onClick={() => addDataIPFS()}
         className="bg-cyan-500 hover:bg-cyan-400 rounded px-4 py-2 mt-2 text-white">
         Upload
         </button>
