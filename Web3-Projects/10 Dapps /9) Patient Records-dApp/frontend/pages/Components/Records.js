@@ -9,7 +9,7 @@ const Records = ({onChange, setHash, fileName, selectedFile, setSelectedFile, ha
 	const contract = useContract({
 		addressOrName: HEALTHCARE_CONTRACT_ADDRESS,
 		contractInterface: HEALTHCARE_CONTRACT_ABI,
-		signerOrProvider: signer
+		signerOrProvider: signer || provider
 	})
 
   const [documentsData, setDocumentsData] = useState([])
@@ -64,6 +64,7 @@ const Records = ({onChange, setHash, fileName, selectedFile, setSelectedFile, ha
 
   useEffect(() => {
     getDocumentsData();
+    console.log("FUNCtion called")
   }, [])
 
 
