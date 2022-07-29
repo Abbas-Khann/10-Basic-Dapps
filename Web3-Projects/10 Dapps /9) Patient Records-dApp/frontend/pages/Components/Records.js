@@ -1,12 +1,19 @@
 import React, {useEffect, useState} from 'react'
 import *  as IPFS  from 'ipfs-core'
+import { useContract, useSigner, useProvider } from 'wagmi'
+import { HEALTHCARE_CONTRACT_ABI, HEALTHCARE_CONTRACT_ADDRESS } from '../../Constants/constants';
 
-const Records = ({onChange, setHash, fileName, selectedFile, setSelectedFile}) => {
-  // First off i need to push hello world to ipfs for testing purposes
-  // Secondly i need to get the data aswell
-  // after that i need to set the input box up to the adding data to IPFS and test it by getting the data
-  // After i get the CID's i need to fetch the addToDocs function from the backend and push this value through the signer to the blockchain
-  // const [path, setPath] = useState('')
+const Records = ({onChange, setHash, fileName, selectedFile, setSelectedFile, hash}) => {
+
+  const [documentsData, setDocumentsData] = useState([])
+
+  const provider = useProvider();
+  const {data: signer} = useSigner();
+  const contract = useContract({
+    addressOrName: HEALTHCARE_CONTRACT_ADDRESS,
+    contractInterface: HEALTHCARE_CONTRACT_ABI,
+    signerOrProvider: signer || provider
+  })
 
   const addDataIPFS = async () => {
     try{
@@ -17,16 +24,39 @@ const Records = ({onChange, setHash, fileName, selectedFile, setSelectedFile}) =
       const resolvedPromise = result.then((promise) => setHash(promise.path))
       console.log("resolvedPromise", resolvedPromise)
       console.log(result)
+      await addDocuments(fileName, hash);
     }
     catch(err){
       console.error(err)
     }
   }
 
+  const addDocuments = async (fileName, hash) => {
+    try{
+      const addDocs = await contract.addToDocsArr(fileName, hash);
+      await addDocs.wait();
+      getDocumentsData();
+    }
+    catch(err){
+      console.error(err)
+    }
+  }
+
+  const getDocumentsData =  async () => {
+    try{
+      const getDocs = await contract.getDocsInfo();
+      await getDocs;
+      setDocumentsData(getDocs);
+    }
+    catch(err){
+      console.error(err)
+    }
+  }
+
+  console.log("documentsData State", documentsData)
+
   // useEffect(() => {
-  //   addDataIPFS()
-  //   // getDataIPFS()
-  //   // testSaveNameToIpfs();
+    
   // }, [])
 
 

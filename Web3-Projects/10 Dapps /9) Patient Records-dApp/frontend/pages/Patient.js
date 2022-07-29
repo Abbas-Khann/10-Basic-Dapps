@@ -25,7 +25,7 @@ const Patient = () => {
             <h1 className='text-center text-white text-3xl mt-4'>Your Admin</h1>
             <div className='sm:flex justify-evenly sm:py-20'>
             <Table />
-            <Records onChange={onChange} setHash={setHash} fileName={fileName} selectedFile={selectedFile} setSelectedFile={setSelectedFile}/>
+            <Records onChange={onChange} setHash={setHash} fileName={fileName} hash={hash} selectedFile={selectedFile} setSelectedFile={setSelectedFile}/>
             </div>
             <div className='flex justify-center items-center'>
             <Reports fileName={fileName} hash={hash} />
