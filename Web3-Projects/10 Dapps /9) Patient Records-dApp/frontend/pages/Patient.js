@@ -6,7 +6,7 @@ import Table from './Components/Table'
 const Patient = () => {
   const [fileName, setFileName] = useState('')
   const [hash, setHash] = useState('')
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState([]);
 
   const onChange = event => {
     setFileName(event.target.value)
