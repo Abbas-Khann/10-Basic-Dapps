@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import Records from './Components/Records'
-import Reports from './Components/Reports'
 import Table from './Components/Table'
 
 const Patient = () => {
@@ -28,7 +27,15 @@ const Patient = () => {
             <Records onChange={onChange} setHash={setHash} fileName={fileName} hash={hash} selectedFile={selectedFile} setSelectedFile={setSelectedFile}/>
             </div>
             <div className='flex justify-center items-center'>
-            <Reports fileName={fileName} hash={hash} />
+              {hash && (
+                <div className='flex flex-col'>
+                <h1 className='text-2xl text-white text-center my-2'>{fileName}</h1>
+                <a 
+                href={`ipfs.io/ipfs/${hash}`}
+                target="_blank"
+                className='text-2xl text-blue-400 border-b-sky-500 border-b-2'>Click here to see it in action</a>
+                </div>
+              )}
             </div>
         </div>
     </section>
