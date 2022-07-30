@@ -14,6 +14,8 @@ const Records = ({onChange, setHash, fileName, selectedFile, setSelectedFile, ha
 
   const [documentsData, setDocumentsData] = useState([])
 
+  const [passingData , setPassingData] = useState();
+
   const addDataIPFS = async () => {
     try{
 
@@ -24,7 +26,12 @@ const Records = ({onChange, setHash, fileName, selectedFile, setSelectedFile, ha
       console.log("resolvedPromise", resolvedPromise)
       console.log(result)
       setTimeout(() => {
-        addDocuments(fileName, hash);
+        // addDocuments(fileName, hash);
+        setPassingData({
+          fileName : fileName,
+          hash : hash
+        } )
+        addDocuments()
      }, 5000) 
       return true;
     }
@@ -33,9 +40,9 @@ const Records = ({onChange, setHash, fileName, selectedFile, setSelectedFile, ha
     }
   }
   
-  const addDocuments = async(fileName, hash) => {
+  const addDocuments = async() => {
     try{
-      const addDocs = await contract.addToDocsArr(fileName, hash);
+      const addDocs = await contract.addToDocsArr(passingData.fileName, passingData.hash);
       await addDocs.wait();
       await getDocumentsData();
     }
@@ -60,7 +67,7 @@ const Records = ({onChange, setHash, fileName, selectedFile, setSelectedFile, ha
   useEffect(() => {
     getDocumentsData();
   }, [])
-
+//----------------------------------------------------
 
   return (
     <div className='flex flex-col justify-center text-white'>
