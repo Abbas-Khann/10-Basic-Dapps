@@ -59,7 +59,6 @@ const Records = ({onChange, setHash, fileName, selectedFile, setSelectedFile, ha
 
   useEffect(() => {
     getDocumentsData();
-    console.log("FUNCtion called")
   }, [])
 
 
