@@ -12,10 +12,6 @@ const Records = ({onChange, setHash, fileName, selectedFile, setSelectedFile, ha
 		signerOrProvider: signer || provider
 	})
 
-  const [documentsData, setDocumentsData] = useState([])
-
-  const [passingData , setPassingData] = useState();
-
   const addDataIPFS = async () => {
     try{
 
@@ -24,49 +20,13 @@ const Records = ({onChange, setHash, fileName, selectedFile, setSelectedFile, ha
       const result = node.add(data);
       const resolvedPromise = result.then((promise) => setHash(promise.path))
       console.log("resolvedPromise", resolvedPromise)
-      console.log(result)
-      setTimeout(() => {
-        // addDocuments(fileName, hash);
-        setPassingData({
-          fileName : fileName,
-          hash : hash
-        } )
-        addDocuments()
-     }, 5000) 
+      console.log(result) 
       return true;
     }
     catch(err){
       console.error(err)
     }
   }
-  
-  const addDocuments = async() => {
-    try{
-      const addDocs = await contract.addToDocsArr(passingData.fileName, passingData.hash);
-      await addDocs.wait();
-      await getDocumentsData();
-    }
-    catch(err){
-      console.error(err)
-    }
-  }
-  
-  const getDocumentsData =  async () => {
-    try{
-      const getDocs = await contract.getDocsInfo();
-      await getDocs;
-      setDocumentsData(getDocs);
-    }
-    catch(err){
-      console.error(err)
-    }
-  }
-
-  console.log("documentsData State", documentsData)
-
-  useEffect(() => {
-    getDocumentsData();
-  }, [])
 //----------------------------------------------------
 
   return (
