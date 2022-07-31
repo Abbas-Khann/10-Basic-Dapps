@@ -1,20 +1,7 @@
 import React from "react";
 import * as IPFS from "ipfs-core";
-import { useContract, useSigner, useProvider } from "wagmi";
-import {
-  HEALTHCARE_CONTRACT_ABI,
-  HEALTHCARE_CONTRACT_ADDRESS,
-} from "../../Constants/constants";
 
 const Records = ({ onChange, setHash, selectedFile, setSelectedFile }) => {
-  const provider = useProvider();
-  const { data: signer } = useSigner();
-  const contract = useContract({
-    addressOrName: HEALTHCARE_CONTRACT_ADDRESS,
-    contractInterface: HEALTHCARE_CONTRACT_ABI,
-    signerOrProvider: signer || provider,
-  });
-
   const addDataIPFS = async () => {
     try {
       const node = await IPFS.create();
