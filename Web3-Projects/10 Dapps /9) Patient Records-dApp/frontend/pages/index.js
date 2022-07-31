@@ -1,8 +1,8 @@
-import React from 'react';
-import Head from 'next/head';
-import RegisterModal from './Components/RegisterModal';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { ConnectButton } from '@rainbow-me/rainbowkit'
+import React from "react";
+import Head from "next/head";
+import RegisterModal from "./Components/RegisterModal";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 const Home = () => {
   return (
     <main>
@@ -16,23 +16,22 @@ const Home = () => {
         </style>
       </Head>
       <section className="h-screen bg-cover bg-[url('/img/doctorr.jpeg')] lg:bg-[url('/img/doctor.jpeg')]">
-        <div className='absolute inset-0 bg-gray-900 bg-opacity-60'>
+        <div className="absolute inset-0 bg-gray-900 bg-opacity-60">
+          <div className="flex flex-col items-center py-72">
+            <h1 className="text-white text-4xl">Patient Records</h1>
+            <p className="text-center text-white p-2 text-lg lg:text-2xl">
+              All of your medical records in one system, Safe and Secure!
+            </p>
+            <div className="flex items-center justify-center">
+              <RegisterModal />
 
-        <div className='flex flex-col items-center py-72'>
-
-      <h1 className='text-white text-4xl'>Patient Records</h1>
-      <p className='text-center text-white p-2 text-lg lg:text-2xl'>All of your medical records in one system, Safe and Secure!</p>
-      <div className='flex items-center justify-center'>
-      <RegisterModal />
-
-      <ConnectButton />
-      </div>
-      </div>
-
+              <ConnectButton />
+            </div>
+          </div>
         </div>
       </section>
     </main>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
