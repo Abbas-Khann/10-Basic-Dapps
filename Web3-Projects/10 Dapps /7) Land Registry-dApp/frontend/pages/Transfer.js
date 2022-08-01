@@ -5,10 +5,12 @@ import { useContract, useProvider, useSigner } from "wagmi";
 import { toast } from "react-toastify";
 
 const Transfer = () => {
+  // States here
   const [addressInput, setAddressInput] = useState("");
   const [newOwnerAddress, setNewOwnerAddress] = useState("");
   const [currOwner, setCurrOwner] = useState("");
 
+  // Importing necessary hooks from wagmi
   const provider = useProvider();
   const { data: signer } = useSigner();
   const contract = useContract({
@@ -19,6 +21,7 @@ const Transfer = () => {
 
   const changeOwner = async (newAddress) => {
     try {
+      // We will fetch the change owner function and pass in the new Address
       const changeLandOwner = await contract.changeOwner(newAddress);
       await changeLandOwner.wait();
       toast.success("Owner Changed Successfully!")
@@ -29,15 +32,17 @@ const Transfer = () => {
 
   const getOwner = async () => {
     try {
+      // We will fetch the owner
       const owner = await contract.getOwner();
       await owner;
+      // The current owner will be set to the owner
       setCurrOwner(owner);
-      console.log("function called");
-      console.log("currOwner", currOwner);
     } catch (err) {
       console.error(err);
     }
   };
+
+  // Taking the value of the address state
   const handleFirstAddress = (e) => {
     setAddressInput(e.target.value);
   };
