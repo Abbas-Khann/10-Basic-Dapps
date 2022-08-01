@@ -18,6 +18,7 @@ const Register = () => {
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
+	// Details state
 	const [details, setDetails] = useState({
 		name: "",
 		age: 0,

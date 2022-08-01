@@ -1,16 +1,19 @@
 import React from "react";
 import * as IPFS from "ipfs-core";
 
-const Records = ({ onChange, setHash, selectedFile, setSelectedFile }) => {
+const Records = (props) => {
+  // recieving props
+  const { onChange, setHash, selectedFile, setSelectedFile } = props;
   const addDataIPFS = async () => {
     try {
+      // create an IPFS node
       const node = await IPFS.create();
+      // data will be set up to the selected file
       const data = selectedFile;
+      // using the add function we will add the data(selectedFile) to the result variable
       const result = node.add(data);
+      // The result variable will return a promise which we will then resolve and set it's path to the hash state
       const resolvedPromise = result.then((promise) => setHash(promise.path));
-      console.log("resolvedPromise", resolvedPromise);
-      console.log(result);
-      return true;
     } catch (err) {
       console.error(err);
     }
