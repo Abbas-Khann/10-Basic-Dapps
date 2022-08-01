@@ -5,7 +5,7 @@ import "./Ownable.sol";
 
 
 contract LandRegistry is Owner {
-    
+    // A better approach to this would be creating a struct but here we're creating states instead to see different ways
     string private country;
     string private city;
     string private landAddress;
@@ -44,7 +44,7 @@ contract LandRegistry is Owner {
 
 contract deployContract {
     LandRegistry[] public allContractsArray;
-
+    // Creating a new LandRegistry contract using this deployContract
     function create(string memory _country, string memory _city, string memory _landAddress, string memory _latitude, string memory _longitude) public {
         LandRegistry land_registry = new LandRegistry(_country, _city, _landAddress, _latitude, _longitude);
         allContractsArray.push(land_registry);
