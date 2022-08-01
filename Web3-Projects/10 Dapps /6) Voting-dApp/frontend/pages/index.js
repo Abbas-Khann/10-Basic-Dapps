@@ -6,25 +6,26 @@ import { useContract, useProvider, useSigner } from 'wagmi';
 const Home = () => {
 
   const [darkMode, setDarkMode] = useState(true);
+  // States
   const [amount, setAmount] = useState(0);
   const [votersAddresses, setVotersAddresses] = useState([]);
-  const[firstCandidateName, setFirstCandidateName] = useState('')
-  const[secondCandidateName, setSecondCandidateName] = useState('')
-  const[firstCandidateVotes, setFirstCandidateVotes] = useState(0)
-  const[secondCandidateVotes, setSecondCandidateVotes] = useState(1)
+  const [firstCandidateName, setFirstCandidateName] = useState('')
+  const [secondCandidateName, setSecondCandidateName] = useState('')
+  const [firstCandidateVotes, setFirstCandidateVotes] = useState(0)
+  const [secondCandidateVotes, setSecondCandidateVotes] = useState(1)
 
-const provider = useProvider();
-  const {data: signer, isLoading} = useSigner();
+  // Providers and signers fetched from wagmi
+  const provider = useProvider();
+  const {data: signer } = useSigner();
   const contract = useContract({
     addressOrName: VOTING_DAPP_ADDRESS,
     contractInterface: VOTING_DAPP_ABI,
     signerOrProvider: signer || provider
   })
 
-
+  // This will fetch the first Candidates Votes
   const getFirstCandidateVotes = async() => {
     try{
-      console.log("Getting Votes");
       const votes = await contract.countVote(0).then((vote) => {
         return parseInt(vote._hex);
       })
@@ -34,9 +35,12 @@ const provider = useProvider();
       console.error(err);
     }
   }
+
+  // Fetching the second Candidates Votes
   const getSecondCandidateVotes = async() => {
     try{
       console.log("Getting Votes");
+      // This will fetch the first index's votes
       const votes = await contract.countVote(1).then((vote) => {
         return parseInt(vote._hex)
       })
@@ -47,6 +51,7 @@ const provider = useProvider();
     }
   }
 
+  // First Candidates Name fetched
   const getFirstCandidateName = async() => {
     try{
       const candidate = await contract.getCandidate(0);
@@ -57,6 +62,7 @@ const provider = useProvider();
     }
   }
 
+  // Second Candidate Name fetched
   const getSecondCandidateName = async() => {
     try{
       const candidate = await contract.getCandidate(1);
@@ -67,6 +73,7 @@ const provider = useProvider();
     }
   }
 
+  // This function uses signer and allows users to vote
   const voteForCandidate = async (id) => {
     try{
 
@@ -79,13 +86,15 @@ const provider = useProvider();
       alert("You have already Voted Once!")
     }
   }
-  
+
+  // This will fetch all the addresses of voters
   const getVotersAddresses = async () => {
     try{
       const voters = await contract.getAddressesArray();
 
       setVotersAddresses(voters)
       console.log("voters", voters)
+      // Fetch voters indices
       getFirstCandidateVotes(0);
       getSecondCandidateVotes(1);
     }
@@ -94,6 +103,7 @@ const provider = useProvider();
     }
   }
 
+  // Mapping through the array
   const allVoters = votersAddresses.map((address) => {
     return <h1 className='text-xl py-1'>{address}</h1>
   })
@@ -102,6 +112,7 @@ const provider = useProvider();
     setDarkMode(prevMode => !prevMode)
   }
 
+  // This will take values
   const handleVoting = (event) => {
     const getValue = event.target.value;
     const changeToInteger = parseInt(getValue - 1);
