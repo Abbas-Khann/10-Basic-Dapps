@@ -52,18 +52,6 @@ contract Healthcare {
      hasRegistered[msg.sender] = true;
      patient_ID++;
     }
-    
-//    function updatePatient(
-//     string memory _name,
-//     uint _age,
-//     string memory _sex, 
-//     string memory _location
-//     ) external {
-//     patientArray[patientMap[msg.sender]].name = _name;
-//     patientArray[patientMap[msg.sender]].age = _age;
-//     patientArray[patientMap[msg.sender]].sex = _sex;
-//     patientArray[patientMap[msg.sender]].location = _location;
-//    }
 
     function addToDocsArr(
         string memory _docName,
