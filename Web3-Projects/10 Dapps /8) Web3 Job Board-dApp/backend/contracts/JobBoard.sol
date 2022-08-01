@@ -9,6 +9,7 @@ pragma solidity ^0.8.0;
 
 contract JobBoard {
     uint256 public JOB_ID = 0;
+    // Creating a Job Struct to take all the necessary properties
     struct Job {
         string title;
         string companyName;
@@ -19,10 +20,11 @@ contract JobBoard {
         string applyUrl;
         string contactEmail;
     }
-
+    // creating an array of the struct
     Job[] public jobsArray;
-    // mapping (uint => Job) public jobMap;
 
+
+    // Taking in the necessary parameters and pushing the struct to the array
     function addJob(
         string memory _title,
         string memory _companyName,
@@ -48,10 +50,12 @@ contract JobBoard {
         );
     }
 
+    // function to get the array above
     function getJobs() public view returns(Job[] memory) {
         return jobsArray;
     }
 
+    // fetching the amount of jobs posted
     function getAllJobsLength() public view returns(uint) {
         return jobsArray.length;
     }
