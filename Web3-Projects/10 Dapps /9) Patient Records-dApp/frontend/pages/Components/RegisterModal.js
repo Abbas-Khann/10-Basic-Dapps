@@ -25,8 +25,7 @@ const Register = () => {
 		location: "",
 	});
 
-	console.log(details)
-
+	// Taking values
 	const handleChange = (event) => {
 		event.preventDefault();
 		const { name, value } = event.target;
@@ -43,9 +42,9 @@ const Register = () => {
 		try{
 
 			if(val.name && val.age && val.sex && val.location) {
+				// Passing the values inside the addPatient function
 				const addUser = await contract.addPatient(val.name, +val.age, val.sex, val.location)
 				await addUser.wait();
-				console.log("Function executed")
 			}
 		}
 		catch(err){
