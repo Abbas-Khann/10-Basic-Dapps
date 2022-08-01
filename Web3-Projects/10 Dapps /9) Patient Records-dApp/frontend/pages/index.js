@@ -24,7 +24,7 @@ const Home = () => {
             </p>
             <div className="flex items-center justify-center">
               <RegisterModal />
-
+              {/* Importing the connect Wallet hook from rainbow above and then using it here */}
               <ConnectButton />
             </div>
           </div>
