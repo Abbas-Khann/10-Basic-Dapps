@@ -42,9 +42,11 @@ const CreateNewJob = () => {
     contractInterface: JOB_BOARD_CONTRACT_ABI,
     signerOrProvider: signer || provider,
   });
+
   // function to add a new job
   const addNewJob = async (val) => {
     try {
+      // if all of these values are provided then add the jobs
       if (
         val.title &&
         val.CompanyName &&
@@ -55,6 +57,7 @@ const CreateNewJob = () => {
         val.OrganisationUrl &&
         val.ContactEmail
       ) {
+        // passing in the values
         const addJobs = await contract.addJob(
           val.title,
           val.CompanyName,
