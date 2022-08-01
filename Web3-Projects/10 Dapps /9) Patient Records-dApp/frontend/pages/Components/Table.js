@@ -6,9 +6,11 @@ import {
 } from "../../Constants/constants";
 
 const Table = () => {
+  // States here
   const [tableData, setTableData] = useState("");
   const [adminAddress, setAdminAddress] = useState("");
 
+  // Setting up the the provider and signer from wagmi 
   const provider = useProvider();
   const { data: signer } = useSigner();
   const contract = useContract({
@@ -19,12 +21,12 @@ const Table = () => {
 
   const getPatientData = async () => {
     try {
+      // fetching the getPatinetInfo function which consists of the patient data submitted to the contract
       const getPatientInfo = contract.getPatientsInfo();
       await getPatientInfo;
-
       const resolvedArray = await getPatientInfo.then((promise) => promise);
       console.log(resolvedArray);
-
+      // Pushing the elements to the newArray on looping each time
       let newArray = [];
       resolvedArray.forEach((element) => {
         newArray.push({
@@ -34,6 +36,7 @@ const Table = () => {
           location: element.location,
         });
       });
+      // setting the tableData to the newArray
       setTableData(newArray);
       getAdmin();
     } catch (err) {
@@ -43,6 +46,7 @@ const Table = () => {
 
   const getAdmin = async () => {
     try {
+      // Fetching the admin state variable which shows the deployer of the contract
       const owner = contract.admin();
       await owner;
       owner.then((promise) => setAdminAddress(promise));
@@ -57,6 +61,7 @@ const Table = () => {
 
   return (
     <>
+    {/* rendering the data */}
       {tableData[0] && (
         <table class="shadow-2xl border-2 border-cyan-200">
           <thead class="text-white">
