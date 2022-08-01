@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const CreateNewJob = () => {
   const { darkMode } = useGlobalContext();
+  // JobData state
   const [jobData, setJobData] = useState({
     title: "",
     CompanyName: "",
@@ -33,6 +34,7 @@ const CreateNewJob = () => {
   };
   console.log(jobData);
 
+  // fetching the necessary hooks from wagmi
   const provider = useProvider();
   const { data: signer } = useSigner();
   const contract = useContract({
@@ -40,7 +42,7 @@ const CreateNewJob = () => {
     contractInterface: JOB_BOARD_CONTRACT_ABI,
     signerOrProvider: signer || provider,
   });
-
+  // function to add a new job
   const addNewJob = async (val) => {
     try {
       if (
