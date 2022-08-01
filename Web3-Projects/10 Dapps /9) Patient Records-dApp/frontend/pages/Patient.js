@@ -3,16 +3,15 @@ import Records from "./Components/Records";
 import Table from "./Components/Table";
 
 const Patient = () => {
+  // Creating states
   const [fileName, setFileName] = useState("");
   const [hash, setHash] = useState("");
   const [selectedFile, setSelectedFile] = useState([]);
 
   const onChange = (event) => {
+    // taking the value
     setFileName(event.target.value);
   };
-
-  console.log("selectedFile", selectedFile);
-  console.log("hash", hash);
 
   return (
     <section className="h-screen bg-cover bg-[url('/img/doctorr.jpeg')] lg:bg-[url('/img/doctor.jpeg')]">
@@ -24,6 +23,7 @@ const Patient = () => {
         <h1 className="text-center text-white text-3xl mt-4">Your Admin</h1>
         <div className="sm:flex justify-evenly sm:py-20">
           <Table />
+          {/* Passing in props so that we can use it inside the the records component */}
           <Records
             onChange={onChange}
             setHash={setHash}
@@ -34,6 +34,7 @@ const Patient = () => {
           />
         </div>
         <div className="flex justify-center items-center">
+          {/* The code below should be rendered as soon as the hash receieves a value */}
           {hash && (
             <div className="flex flex-col">
               <h1 className="text-2xl text-white text-center my-2">
