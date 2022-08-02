@@ -21,11 +21,11 @@ const Navbar = (props) => {
       <nav
         className={`py-4  ${
           darkMode
-            ? `bg-gradient-to-r from-sky-600 to-indigo-600`
-            : `bg-gradient-to-r from-sky-400 to-[#867AE9] shadow-lg`
+            ? `bg-orange-400`
+            : `bg-[#1d2132] shadow-lg`
         } `}
       >
-        <div className=" px-16 flex items-center justify-between text-[#0C1E36] text-xl md:text-2xl">
+        <div className=" px-16 flex items-center justify-between text-[#fff] text-xl md:text-2xl">
           {darkMode ? (
             <BsMoon
               className="cursor-pointer"
