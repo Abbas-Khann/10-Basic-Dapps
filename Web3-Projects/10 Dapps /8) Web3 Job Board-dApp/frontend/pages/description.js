@@ -10,7 +10,8 @@ import { useProvider, useSigner, useContract } from "wagmi";
 const description = () => {
   const { darkMode, indexData } = useGlobalContext();
   const [descriptionData, setDescriptionData] = useState([]);
-
+  
+  // fetching the necessary hooks from wagmi
   const provider = useProvider();
   const { data: signer } = useSigner();
   const contract = useContract({
@@ -21,11 +22,12 @@ const description = () => {
 
   const getAllJobs = async () => {
     try {
+      // fetching the jobs that were added using the getJobs function 
       const getJobsArr = contract.getJobs();
       await getJobsArr;
 
       const resolvedArray = await getJobsArr.then((promise) => promise);
-
+      // Cleaning up 
       let desArr = [];
       resolvedArray.forEach((item) => {
         desArr.push({
@@ -39,12 +41,14 @@ const description = () => {
           contactEmail: item.contactEmail,
         });
       });
+      // setting up the descriptionData state to the array that received all the values
       setDescriptionData(desArr);
     } catch (err) {
       console.error(err);
     }
   };
 
+  // Calling the function on page load
   useEffect(() => {
     getAllJobs();
   }, []);

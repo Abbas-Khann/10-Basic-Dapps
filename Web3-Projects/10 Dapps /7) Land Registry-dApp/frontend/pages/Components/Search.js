@@ -4,7 +4,7 @@ import { landContractABI } from "../../Constants/constants";
 
 const Search = () => {
   const [addressInput, setAddressInput] = useState("");
-
+  // Necessary States
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [landAddress, setLandAddress] = useState("");
@@ -13,14 +13,16 @@ const Search = () => {
   const [currentOwner, setCurrentOwner] = useState("");
   const [prevOwner, setPrevOwner] = useState("");
 
+  // Contract, provider and signer fetched from wagmi
   const provider = useProvider();
   const { data: signer } = useSigner();
-
   const landContract = useContract({
     addressOrName: addressInput,
     contractInterface: landContractABI,
     signerOrProvider: signer || provider,
   });
+
+  // The following functions will fetch the required data
 
   const getCountryName = async () => {
     try {

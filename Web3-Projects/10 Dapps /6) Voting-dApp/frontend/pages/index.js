@@ -5,8 +5,10 @@ import { useContract, useProvider, useSigner } from "wagmi";
 
 const Home = () => {
   const [darkMode, setDarkMode] = useState(true);
+  // States
   const [amount, setAmount] = useState(0);
   const [votersAddresses, setVotersAddresses] = useState([]);
+<<<<<<< HEAD
   const [firstCandidateName, setFirstCandidateName] = useState("");
   const [secondCandidateName, setSecondCandidateName] = useState("");
   const [firstCandidateVotes, setFirstCandidateVotes] = useState(0);
@@ -14,15 +16,31 @@ const Home = () => {
 
   const provider = useProvider();
   const { data: signer, isLoading } = useSigner();
+=======
+  const [firstCandidateName, setFirstCandidateName] = useState('')
+  const [secondCandidateName, setSecondCandidateName] = useState('')
+  const [firstCandidateVotes, setFirstCandidateVotes] = useState(0)
+  const [secondCandidateVotes, setSecondCandidateVotes] = useState(1)
+
+  // Providers and signers fetched from wagmi
+  const provider = useProvider();
+  const {data: signer } = useSigner();
+>>>>>>> upstream/main
   const contract = useContract({
     addressOrName: VOTING_DAPP_ADDRESS,
     contractInterface: VOTING_DAPP_ABI,
     signerOrProvider: signer || provider,
   });
 
+<<<<<<< HEAD
   const getFirstCandidateVotes = async () => {
     try {
       console.log("Getting Votes");
+=======
+  // This will fetch the first Candidates Votes
+  const getFirstCandidateVotes = async() => {
+    try{
+>>>>>>> upstream/main
       const votes = await contract.countVote(0).then((vote) => {
         return parseInt(vote._hex);
       });
@@ -30,10 +48,19 @@ const Home = () => {
     } catch (err) {
       console.error(err);
     }
+<<<<<<< HEAD
   };
   const getSecondCandidateVotes = async () => {
     try {
+=======
+  }
+
+  // Fetching the second Candidates Votes
+  const getSecondCandidateVotes = async() => {
+    try{
+>>>>>>> upstream/main
       console.log("Getting Votes");
+      // This will fetch the first index's votes
       const votes = await contract.countVote(1).then((vote) => {
         return parseInt(vote._hex);
       });
@@ -43,8 +70,14 @@ const Home = () => {
     }
   };
 
+<<<<<<< HEAD
   const getFirstCandidateName = async () => {
     try {
+=======
+  // First Candidates Name fetched
+  const getFirstCandidateName = async() => {
+    try{
+>>>>>>> upstream/main
       const candidate = await contract.getCandidate(0);
       setFirstCandidateName(candidate);
     } catch (err) {
@@ -52,8 +85,14 @@ const Home = () => {
     }
   };
 
+<<<<<<< HEAD
   const getSecondCandidateName = async () => {
     try {
+=======
+  // Second Candidate Name fetched
+  const getSecondCandidateName = async() => {
+    try{
+>>>>>>> upstream/main
       const candidate = await contract.getCandidate(1);
       setSecondCandidateName(candidate);
     } catch (err) {
@@ -61,6 +100,7 @@ const Home = () => {
     }
   };
 
+  // This function uses signer and allows users to vote
   const voteForCandidate = async (id) => {
     try {
       const vote = await contract.vote(id);
@@ -71,12 +111,28 @@ const Home = () => {
     }
   };
 
+<<<<<<< HEAD
+=======
+    }
+    catch(err){
+      alert("You have already Voted Once!")
+    }
+  }
+
+  // This will fetch all the addresses of voters
+>>>>>>> upstream/main
   const getVotersAddresses = async () => {
     try {
       const voters = await contract.getAddressesArray();
 
+<<<<<<< HEAD
       setVotersAddresses(voters);
       console.log("voters", voters);
+=======
+      setVotersAddresses(voters)
+      console.log("voters", voters)
+      // Fetch voters indices
+>>>>>>> upstream/main
       getFirstCandidateVotes(0);
       getSecondCandidateVotes(1);
     } catch (err) {
@@ -84,6 +140,7 @@ const Home = () => {
     }
   };
 
+  // Mapping through the array
   const allVoters = votersAddresses.map((address) => {
     return <h1 className="text-xl py-1">{address}</h1>;
   });
@@ -92,6 +149,7 @@ const Home = () => {
     setDarkMode((prevMode) => !prevMode);
   };
 
+  // This will take values
   const handleVoting = (event) => {
     const getValue = event.target.value;
     const changeToInteger = parseInt(getValue - 1);

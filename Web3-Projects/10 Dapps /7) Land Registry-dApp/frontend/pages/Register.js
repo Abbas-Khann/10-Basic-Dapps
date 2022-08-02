@@ -9,14 +9,16 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
+  // Fetching necessary hooks from Wagmi
   const provider = useProvider();
-  const { data: signer, isLoading } = useSigner();
+  const { data: signer } = useSigner();
   const deployerContract = useContract({
     addressOrName: deployerContractAddress,
     contractInterface: deployerContractABI,
     signerOrProvider: signer || provider,
   });
 
+  // LandData state which consists of all the properties
   const [landData, setLandData] = useState({
     country: "",
     city: "",
@@ -41,6 +43,7 @@ const Register = () => {
 
   const registerData = async (val) => {
     try {
+      // If all the values exist then the function below will be used to create a new Land
       if (
         val.country &&
         val.city &&
@@ -48,6 +51,7 @@ const Register = () => {
         val.latitude &&
         val.longitude
       ) {
+        // This will create a new contract and will consist of all the required values
         const createNewLandContract = await deployerContract.create(
           val.country,
           val.city,
@@ -55,9 +59,7 @@ const Register = () => {
           val.latitude,
           val.longitude
         );
-        isLoading = true;
         await createNewLandContract.wait();
-        isLoading = false;
         console.log("Transaction details", createNewLandContract);
         fetchAllContracts();
         getNewlyDeployedContractAddress();
@@ -69,6 +71,7 @@ const Register = () => {
 
   const getNewlyDeployedContractAddress = async () => {
     try {
+      // We will get the newly deployed contract address and copy it to clipboard
       const deployedContractAddress =
         deployerContract.getDeployedContractAddress();
       await deployedContractAddress;
@@ -87,6 +90,7 @@ const Register = () => {
 
   const fetchAllContracts = async () => {
     try {
+      // This will fetch all the contract addresses inside of an array
       const allDeployedContracts = deployerContract.getContractAddresses();
       await allDeployedContracts;
       console.log("All addresses", allDeployedContracts);

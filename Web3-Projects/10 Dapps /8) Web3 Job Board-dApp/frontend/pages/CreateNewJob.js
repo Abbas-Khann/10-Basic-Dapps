@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const CreateNewJob = () => {
   const { darkMode } = useGlobalContext();
+  // JobData state
   const [jobData, setJobData] = useState({
     title: "",
     CompanyName: "",
@@ -33,6 +34,7 @@ const CreateNewJob = () => {
   };
   console.log(jobData);
 
+  // fetching the necessary hooks from wagmi
   const provider = useProvider();
   const { data: signer } = useSigner();
   const contract = useContract({
@@ -41,8 +43,10 @@ const CreateNewJob = () => {
     signerOrProvider: signer || provider,
   });
 
+  // function to add a new job
   const addNewJob = async (val) => {
     try {
+      // if all of these values are provided then add the jobs
       if (
         val.title &&
         val.CompanyName &&
@@ -53,6 +57,7 @@ const CreateNewJob = () => {
         val.OrganisationUrl &&
         val.ContactEmail
       ) {
+        // passing in the values
         const addJobs = await contract.addJob(
           val.title,
           val.CompanyName,

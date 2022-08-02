@@ -11,6 +11,7 @@ const AllJobs = () => {
   const { darkMode, setIndexData } = useGlobalContext();
   const [job, setJob] = useState([]);
 
+  // fetching the necessary hooks from wagmi
   const provider = useProvider();
   const { data: signer } = useSigner();
   const contract = useContract({
@@ -21,6 +22,7 @@ const AllJobs = () => {
 
   const getAllJobs = async () => {
     try {
+      // fetching the getJobs function which consists of all the jobs added to the array
       const getJobsArr = contract.getJobs();
       await getJobsArr;
       getJobsArr.then((promise) => setJob(promise));
@@ -40,6 +42,7 @@ const AllJobs = () => {
 
   return (
     <div className={`${darkMode && "dark"}`}>
+      {/* mapping through the job array and rendering the values */}
       {job.map((job, index) => {
         return (
           <div onClick={() => handleIndex(index)}>
